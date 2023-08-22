@@ -1,0 +1,55 @@
+.subnav {
+  display: flex;
+  margin: 20px 0;
+  align-items: center;
+
+  &__item {
+    background: var(--color-neutral-700);
+   
+
+    border-radius: 0.3em;
+    color: var(--color-white);
+    display: inline-block;
+    font-size: 1.4rem;
+    letter-spacing: 0.3px;
+    line-height: 1;
+    margin-right: 5px;
+    font-weight: 350;
+    padding: 0.5em 0.9em;
+    transition: 0.3s ease-in;
+
+    &:hover {
+      background: var(--color-neutral-900);
+      text-decoration: none;
+    }
+
+    &.is-subbtn {
+       border: none;
+       border-radius: 0.3em;
+       color: var(--color-white);
+       display: inline-block;
+       font-size: 1.2rem;
+       letter-spacing: 0.2px;
+       line-height: 1;
+       margin-right: 5px;
+       padding: 0.4em 0.8em;
+       transition: 0.3s ease-in;
+    }
+
+    &.is-active {
+      background: var(--color-primary-500);
+    }
+     &.is-positive {
+      background: var(--color-green-500);
+    }
+     &.is-info {
+      background: var(--color-blue-500);
+    }
+  }
+
+  &.is-child &__item {
+    background: var(--color-neutral-500);
+  }
+
+
+}

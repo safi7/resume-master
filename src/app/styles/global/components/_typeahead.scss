@@ -1,0 +1,14 @@
+ngb-typeahead-window {
+  .dropdown-item {
+    color: var(--color-neutral-900);
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    padding: 6px 12px;
+  }
+
+  .dropdown-item.active,
+  .dropdown-item:active {
+    color: var(--color-neutral-900);
+    background: var(--color-neutral-200);
+  }
+}

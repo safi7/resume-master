@@ -1,0 +1,14 @@
+<div class="message" [ngClass]="envelop.type" *ngIf="envelop.message" (click)="envelop.message = ''">
+  <div class="message__icon" [ngSwitch]="envelop.type">
+    <i class="fas fa-bell fa-fw" *ngSwitchDefault></i>
+    <i class="fas fa-check fa-fw" *ngSwitchCase="'success'"></i>
+    <i class="fas fa-info fa-fw" *ngSwitchCase="'info'"></i>
+    <i class="fas fa-exclamation fa-fw" *ngSwitchCase="'warning'"></i>
+    <i class="fas fa-times fa-fw" *ngSwitchCase="'error'"></i>
+  </div>
+
+  <div class="message__content">
+    <h1 class="message__title">{{ envelop.title }}</h1>
+    <p class="message__text">{{ envelop.message }}</p>
+  </div>
+</div>

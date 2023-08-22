@@ -1,0 +1,48 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "target": "es2020",
+    "downlevelIteration": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@errors/*": [
+        "src/app/errors/*"
+      ],
+      "@interfaces/*": [
+        "src/app/interfaces/*"
+      ],
+      "@styles/*": [
+        "src/app/styles/*"
+      ],
+      "@helpers/*": [
+        "src/app/helpers/*"
+      ],
+      "@configs/*": [
+        "src/app/configs/*"
+      ]
+    }
+  }
+}

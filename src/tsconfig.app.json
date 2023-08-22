@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "types": []
+  },
+  "angularCompilerOptions": {
+    "annotationsAs": "static fields",
+    "annotateForClosureCompiler": true,
+    "preserveWhitespaces": false,
+    "fullTemplateTypeCheck": true
+  }  ,
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ]
+}

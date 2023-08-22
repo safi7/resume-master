@@ -1,0 +1,32 @@
+body {
+  .badge {
+    background: var(--color-neutral-300);
+    border-radius: 10px;
+    color: var(--color-neutral-900);
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.3em 0.9em;
+  
+    &.is-negative {
+      background: var(--color-red-300);
+      color: var(--color-red-900);
+    }
+  
+    &.is-positive {
+      background: var(--color-green-300);
+      color: var(--color-green-900);
+    }
+  
+    &.is-info {
+      background: var(--color-blue-300);
+      color: var(--color-blue-900);
+    }
+  
+    &.is-warning {
+      background: var(--color-yellow-300);
+      color: var(--color-yellow-900);
+    }
+  }
+}
+

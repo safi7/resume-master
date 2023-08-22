@@ -1,0 +1,117 @@
+@import 'global/vendor/fontawesome/fontawesome';
+
+// ==========================
+// Sport Icon
+span.sport {
+  display: flex;
+  align-items: center;
+}
+
+span.sport i.icon {
+  @extend .fal;
+  @extend .fa-fw;
+  margin-right: 5px;
+
+  &::before {
+    content: fa-content($fa-var-whistle);
+  }
+}
+
+span.sport i.sport-1::before  {
+  content: fa-content($fa-var-futbol);
+}
+
+span.sport i.sport-2::before {
+  content: fa-content($fa-var-basketball-ball);
+}
+
+span.sport i.sport-3::before {
+  content: fa-content($fa-var-baseball);
+}
+
+span.sport i.sport-4::before {
+  content: fa-content($fa-var-hockey-puck);
+}
+
+span.sport i.sport-5::before {
+  content: fa-content($fa-var-tennis-ball);
+}
+
+span.sport i.sport-6::before {
+  content: fa-content($fa-var-hand-paper);
+}
+
+span.sport i.sport-9::before {
+  content: fa-content($fa-var-golf-club);
+}
+
+span.sport i.sport-11::before,
+span.sport i.sport-131::before,
+span.sport i.sport-169::before {
+  content: fa-content($fa-var-motorcycle);
+}
+
+span.sport i.sport-12::before, 
+span.sport i.sport-13::before, 
+span.sport i.sport-16::before {
+  content: fa-content($fa-var-football-ball);
+}
+
+span.sport i.sport-17::before {
+  content: fa-content($fa-var-biking);
+}
+
+span.sport i.sport-18::before {
+  content: fa-content($fa-var-sparkles);
+}
+
+span.sport i.sport-19::before {
+  content: fa-content($fa-var-ball-pile);
+}
+
+span.sport i.sport-21::before {
+  content: fa-content($fa-var-cricket);
+}
+
+span.sport i.sport-22::before {
+  content: fa-content($fa-var-bullseye);
+}
+
+span.sport i.sport-23::before {
+  content: fa-content($fa-var-volleyball-ball);
+}
+
+span.sport i.sport-26::before {
+  content: fa-content($fa-var-water);
+}
+
+span.sport i.sport-40::before {
+  content: fa-content($fa-var-flag-checkered);
+}
+
+span.sport i.sport-43::before,
+span.sport i.sport-44::before {
+  content: fa-content($fa-var-skiing);
+}
+
+span.sport i.sport-46::before {
+  content: fa-content($fa-var-running);
+}
+
+span.sport i.sport-48::before {
+  content: fa-content($fa-var-ski-jump);
+}
+
+span.sport i.sport-81::before {
+  content: fa-content($fa-var-flag-checkered);
+}
+
+span.sport i.sport-109::before,
+span.sport i.sport-110::before {
+  content: fa-content($fa-var-headset);
+}
+
+span.sport i.sport-129::before,
+span.sport i.sport-148::before {
+  content: fa-content($fa-var-cars);
+}

@@ -1,0 +1,72 @@
+@import './functions';
+
+// Colors
+$color-primary: #A62639;
+$color-primary-100: shades($color-primary, 100);
+$color-primary-200: shades($color-primary, 200);
+$color-primary-300: shades($color-primary, 300);
+$color-primary-400: shades($color-primary, 400);
+$color-primary-500: shades($color-primary, 500);
+$color-primary-600: shades($color-primary, 600);
+$color-primary-700: shades($color-primary, 700);
+$color-primary-800: shades($color-primary, 800);
+$color-primary-900: shades($color-primary, 900);
+
+$color-secondary: #F6BD60;
+$color-secondary-100: shades($color-secondary, 100);
+$color-secondary-200: shades($color-secondary, 200);
+$color-secondary-300: shades($color-secondary, 300);
+$color-secondary-400: shades($color-secondary, 400);
+$color-secondary-500: shades($color-secondary, 500);
+$color-secondary-600: shades($color-secondary, 600);
+$color-secondary-700: shades($color-secondary, 700);
+$color-secondary-800: shades($color-secondary, 800);
+$color-secondary-900: shades($color-secondary, 900);
+
+$color-accent: #6CCFF6;
+$color-accent-100: shades($color-accent, 100);
+$color-accent-200: shades($color-accent, 200);
+$color-accent-300: shades($color-accent, 300);
+$color-accent-400: shades($color-accent, 400);
+$color-accent-500: shades($color-accent, 500);
+$color-accent-600: shades($color-accent, 600);
+$color-accent-700: shades($color-accent, 700);
+$color-accent-800: shades($color-accent, 800);
+$color-accent-900: shades($color-accent, 900);
+
+$color-neutral: #EDF0DA;
+$color-neutral-100: shades($color-neutral, 100);
+$color-neutral-200: shades($color-neutral, 200);
+$color-neutral-300: shades($color-neutral, 300);
+$color-neutral-400: shades($color-neutral, 400);
+$color-neutral-500: shades($color-neutral, 500);
+$color-neutral-600: shades($color-neutral, 600);
+$color-neutral-700: shades($color-neutral, 700);
+$color-neutral-800: shades($color-neutral, 800);
+$color-neutral-900: shades($color-neutral, 900);
+
+$color-black: #333333;
+$color-black-100: shades($color-black, 100);
+$color-black-200: shades($color-black, 200);
+$color-black-300: shades($color-black, 300);
+$color-black-400: shades($color-black, 400);
+$color-black-500: shades($color-black, 500);
+$color-black-600: shades($color-black, 600);
+$color-black-700: shades($color-black, 700);
+$color-black-800: shades($color-black, 800);
+$color-black-900: shades($color-black, 900);
+
+$color-blue: #0000FF;
+$color-blue-500: shades($color-blue, 500);
+
+$color-teal: #008080;
+$color-teal-200: shades($color-teal, 200);
+$color-teal-300: shades($color-teal, 300);
+$color-teal-400: shades($color-teal, 400);
+
+
+// Fonts
+$font-default-stack: 'Source Sans Pro',
+sans-serif;
+$font-digit-stack: 'Roboto Condensed',
+sans-serif;

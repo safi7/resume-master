@@ -1,0 +1,79 @@
+@import 'abstracts/mixins';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,900&display=swap');
+
+html {
+  font-size: 62.5%;
+
+  @include respond(phone-only) {
+    font-size: 62.5%;
+  }
+
+  @include respond(tablet-portrait-up) {
+    font-size: 62.5%;
+  }
+
+  @include respond(tablet-landscape-up) {
+    font-size: 62.5%;
+  }
+
+  @include respond(desktop-up) {
+    font-size: 62.5%;
+  }
+
+  @include respond(big-desktop-up) {
+    font-size: 62.5%;
+  }
+}
+
+body {
+  color: var(--color-neutral-800);
+  font-family: var(--font-default-stack);
+  font-size: 1.6rem;
+}
+
+.digits {
+  font-family: var(--font-digit-stack);
+  font-weight: 700;
+}
+
+.hint {
+  padding-left: 5px;
+  border-left: 3px solid var(--color-neutral);
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+h1 {
+  font-size: calc(1.6rem * 1.602);
+  font-weight: 600;
+  line-height: 1;
+}
+
+h2 {
+  font-size: calc(1.6rem * 1.424);
+  font-weight: 600;
+  line-height: 1;
+}
+
+h3 {
+  font-size: calc(1.6rem * 1.266);
+  font-weight: 600;
+  line-height: 1;
+}
+
+h4 {
+  font-size: calc(1.6rem * 1.125);
+  font-weight: 600;
+  line-height: 1;
+}
+
+p {
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+strong {
+  font-weight: 600;
+}

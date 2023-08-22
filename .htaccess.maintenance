@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REMOTE_ADDR} !^111.222.333.444
+	RewriteCond %{REMOTE_ADDR} !^112.222.333.444
+	RewriteCond %{REQUEST_URI} !^/maintenance/(.)*$ [NC]
+	RewriteRule ^(.*)$ /maintenance/index.html [R=302,L]
+</IfModule>
