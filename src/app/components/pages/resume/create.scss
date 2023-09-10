@@ -1,0 +1,160 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 750px;
+    max-height: 750px;
+    overflow-y: auto;
+
+
+    label {
+        display: inline-block;
+        font-weight: bold;
+        margin-top: 10px;
+        padding: 2px 0px;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    div.box {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    button.reset {
+        margin-left: 10px;
+    }
+
+    div.btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+}
+
+div.hbox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+
+div.rhbox {
+    width: 100%;
+    text-align: right;
+    padding: 10px;
+
+    span {
+        display: inline-block;
+        width: 340px;
+        text-align: left;
+        margin-left: 10px;
+    }
+}
+
+div.skills {
+    height: 400px;
+}
+
+div.dhbox {
+    max-width: 800px;
+    display: grid;
+    align-items: baseline;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+}
+
+div.skills textarea {
+    margin-bottom: 0px;
+    border-radius: 10px;
+}
+
+
+div.list-skills {
+    border: 1px solid var(--color-neutral-200);
+    border-radius: 10px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+div.skill {
+    padding: 10px 10px;
+    margin-top: 5px;
+    border-top: 1px solid var(--color-neutral-300);
+    cursor: pointer;
+}
+
+div.skill:first-child {
+    border-top: 0px;
+}
+
+button.add {
+    background-color: var(--color-blue-800);
+    color: white;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+button.is-add {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-width: 370px;
+}
+
+button.added {
+    background-color: var(--color-blue-100);
+    color: var(--color-neutral-800);
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+.btns button {
+    width: 100px;
+    border-radius: 20px;
+    font-size: 1.6rem;
+    padding: 7px;
+
+    span {
+        font-size: 2rem;
+        margin-right: 3px;
+    }
+}
+
+.btns button.is-back {
+    background-color: white;
+    font-weight: bold;
+}

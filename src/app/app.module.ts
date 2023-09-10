@@ -10,9 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './modules/core.module';
 import { ErrorGlobalHandler } from './errors/global';
 import { ManageHttpInterceptor } from './interceptors/manage-http.interceptor';
-import { HttpCancelService } from '@services/http-cancel.service';
-import { CredentialComponent } from '@components/pages/credetial/credential.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ResumeCreateComponent } from '@components/pages/resume/create.component';
 
 export function tokenGetter() {
   // console.log('__tokenGetter', localStorage.getItem('jwt_token'));
@@ -20,7 +19,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [AppComponent, CredentialComponent,],
+  declarations: [AppComponent, ResumeCreateComponent,],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -44,12 +43,6 @@ export function tokenGetter() {
    * * Respond A
    **/
   providers: [
-    HttpCancelService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ManageHttpInterceptor,
-      multi: true
-    },
     {
       provide: ErrorHandler,
       useClass: ErrorGlobalHandler

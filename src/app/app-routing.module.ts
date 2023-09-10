@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CredentialComponent } from '@components/pages/credetial/credential.component';
+import { ResumeCreateComponent } from '@components/pages/resume/create.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/resume/create', pathMatch: 'full' },
   {
-    path: 'login',
+    path: 'resume/create',
     children: [
-      { path: '', component: CredentialComponent, pathMatch: 'full' },
+      { path: '', component: ResumeCreateComponent, pathMatch: 'full' },
     ]
   }
   // { path: '**', redirectTo: '' }

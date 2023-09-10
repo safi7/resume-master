@@ -11,9 +11,7 @@ import { environment } from '@env/environment';
 
 @Injectable({ providedIn: 'root' })
 export default class HttpService {
-  baseApiPath = `//${environment.apiHost}/1.0`;
-  // baseApiFeedPath = `//${environment.apiHostFeed}/1.0`;
-
+  baseApiPath = `https://builder.zety.com/eb/api/v1`;
 
   constructor(
     private http: HttpClient,
@@ -104,13 +102,6 @@ export default class HttpService {
       message: error.message,
     });
     return throwError(error);
-  }
-
-  defaultDateRange() {
-    const t = moment().utcOffset('-04:00');
-    const from = t.format('YYYY-MM-DD 04:00:00');
-    const to = t.add(1, 'days').format('YYYY-MM-DD 04:00:00');
-    return { from, to };
   }
 }
 

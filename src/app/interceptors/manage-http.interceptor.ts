@@ -9,13 +9,13 @@ import {
 import { Observable } from 'rxjs';
 import { Router, ActivationEnd } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { HttpCancelService } from '@services/http-cancel.service';
 
 @Injectable()
 export class ManageHttpInterceptor implements HttpInterceptor {
 
-  constructor(router: Router,
-    private httpCancelService: HttpCancelService) {
+  constructor(
+    router: Router,
+  ) {
     router.events.subscribe(event => {
       // An event triggered at the end of the activation part of the Resolve phase of routing.
       if (event instanceof ActivationEnd) {
@@ -26,6 +26,6 @@ export class ManageHttpInterceptor implements HttpInterceptor {
   }
 
   intercept<T>(req: HttpRequest<T>, next: HttpHandler): Observable<HttpEvent<T>> {
-    return next.handle(req).pipe(takeUntil(this.httpCancelService.onCancelPendingRequests()))
+    return next.handle(req).pipe()
   }
 }
