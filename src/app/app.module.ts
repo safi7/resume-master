@@ -9,9 +9,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './modules/core.module';
 import { ErrorGlobalHandler } from './errors/global';
-import { ManageHttpInterceptor } from './interceptors/manage-http.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResumeCreateComponent } from '@components/pages/resume/create.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export function tokenGetter() {
   // console.log('__tokenGetter', localStorage.getItem('jwt_token'));
@@ -47,7 +47,7 @@ export function tokenGetter() {
       provide: ErrorHandler,
       useClass: ErrorGlobalHandler
     },
-
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })

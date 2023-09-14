@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "office": {
+    "resume": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -106,18 +106,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "office:build"
+            "browserTarget": "resume:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "office:build:production"
+              "browserTarget": "resume:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "office:build"
+            "browserTarget": "resume:build"
           }
         },
         "test": {
@@ -140,7 +140,7 @@
         }
       }
     },
-    "office-e2e": {
+    "resume-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -152,7 +152,7 @@
           },
           "configurations": {
             "production": {
-              "devServerTarget": "office:serve:production"
+              "devServerTarget": "resume:serve:production"
             }
           }
         }
