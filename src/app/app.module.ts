@@ -13,11 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResumeCreateComponent } from '@components/pages/resume/create.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-export function tokenGetter() {
-  // console.log('__tokenGetter', localStorage.getItem('jwt_token'));
-  return localStorage.getItem('jwt_token');
-}
-
 @NgModule({
   declarations: [AppComponent, ResumeCreateComponent,],
   imports: [

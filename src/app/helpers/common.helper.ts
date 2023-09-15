@@ -1,7 +1,6 @@
 import { startWith, filter } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import moment from 'moment-timezone';
-import { outcomes } from '@configs/outcomes';
 
 @Injectable({ providedIn: 'root' })
 export default class CommonHelper {
@@ -25,10 +24,6 @@ export default class CommonHelper {
     }
 
     return dates;
-  }
-
-  marketOutcomes(market_type_id) {
-    return outcomes.filter(v => +v.market_type_id === +market_type_id);
   }
 
   authorize(requirep) {

@@ -4,22 +4,22 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MessageComponent } from '@components/shared/message/index.component';
 import { SimpleModalComponent } from '@components/shared/modal/simple-modal.component';
-import { SimplePanelComponent } from '@components/shared/expandable-panel/simple-panel.component';
 import { PopupContentDirective } from '../directives/popup-content.directive';
-import { ExpandableContentDirective } from '../directives/expandable-content.directive';
-import { DigitOnlyDirective } from '../directives/digit-only.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { SampleBaseComponent } from '../components/shared/samples/base.component';
+import {
+  Sample01Component
+} from '../components/shared/samples/index.component'
 
 @NgModule({
   declarations: [
     SimpleModalComponent,
-    SimplePanelComponent,
     MessageComponent,
     PopupContentDirective,
-    ExpandableContentDirective,
-    DigitOnlyDirective,
+    SampleBaseComponent,
+    Sample01Component,
   ],
   imports: [
     CommonModule,
@@ -32,13 +32,12 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
   ],
   exports: [
     SimpleModalComponent,
-    SimplePanelComponent,
     MessageComponent,
     PopupContentDirective,
-    ExpandableContentDirective,
-    DigitOnlyDirective,
     NgxSliderModule,
     LazyLoadImageModule,
+    SampleBaseComponent,
+    Sample01Component,
   ],
   providers: [],
 })

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MessageService } from '@services/message.service';
 import { of } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
 import _ from 'lodash';
 import ZetyService from '@services/zety.service';
+import samples from '@configs/samples';
+import { SampleBaseComponent } from '../../shared/samples/base.component';
 
 @Component({
   selector: 'app-resume-create',
@@ -11,12 +13,13 @@ import ZetyService from '@services/zety.service';
   styleUrls: ['./create.scss']
 })
 export class ResumeCreateComponent implements OnInit {
-
+  @ViewChild('samples', { read: ViewContainerRef }) samplesVc: ViewContainerRef;
   on = {
     api_key: null,
     api_secret: null,
     stage: 5,
-    skills: null
+    skills: null,
+    sample_id: 1,
   }
 
   list = {
@@ -61,12 +64,14 @@ export class ResumeCreateComponent implements OnInit {
     education: { university: null, address: null, degree: null, field: null, start: null, end: null, current: false },
     project: { title: null, link: null },
     reference: { name: null, email: null },
-    language: { name: null }
+    language: { name: null },
+    sampleComponents: {}
   }
 
   constructor(
     private messageS: MessageService,
-    private zetyS: ZetyService
+    private zetyS: ZetyService,
+    private resolver: ComponentFactoryResolver,
   ) {
     const resume = localStorage.getItem('resume');
     if (resume) {
@@ -106,6 +111,16 @@ export class ResumeCreateComponent implements OnInit {
     }
 
     localStorage.setItem('resume', JSON.stringify(data));
+
+    if (!this.data.sampleComponents[this.on.sample_id]) {
+      const factory: ComponentFactory<SampleBaseComponent> =
+        this.resolver.resolveComponentFactory(samples[this.on.sample_id]);
+      const componentRef = this.samplesVc.createComponent(factory);
+      componentRef.instance.show = 1;
+      this.data.sampleComponents[this.on.sample_id] = componentRef.instance;
+      this.data.sampleComponents[this.on.sample_id].receive(data)
+    }
+
   }
 
   onStage(stage) {
@@ -249,4 +264,6 @@ export class ResumeCreateComponent implements OnInit {
     }
     return this.zetyS.getSkills(params)
   }
+
+  const
 }
