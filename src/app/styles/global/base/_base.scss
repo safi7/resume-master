@@ -28,8 +28,10 @@ html {
 a {
   color: var(--color-primary);
   text-decoration: none;
-  
-  &:hover { text-decoration: underline; }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 a,
@@ -37,9 +39,9 @@ button {
   cursor: pointer;
 }
 
-ul {
-  list-style: none;
-}
+// ul {
+//   list-style: none;
+// }
 
 h1,
 h2,

@@ -158,3 +158,30 @@ button.added {
     background-color: white;
     font-weight: bold;
 }
+
+.sample-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    justify-content: center;
+    padding: 20px;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    div.sub-container {
+        width: 900px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    div.btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 5px 20px;
+    }
+}

@@ -1,87 +1,127 @@
-.message {
-  align-items: flex-start;
-  background: var(--color-neutral-100);
-  border-left: 5px solid var(--color-neutral-300);
-  display: flex;
-  margin: 5px 0 10px 0;
-  padding: 10px;
+.main {
+  width: 900px;
+  max-width: 900px;
+  min-width: 900px;
+  background-color: #A4E5E0;
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+}
 
-  &__icon {
-    background: var(--color-neutral-400);
-    border-radius: 50%;
-    color: var(--color-neutral-900);
-    font-size: 1rem;
-    padding: 8px;
+p {
+  padding: 0px;
+  margin: 0px;
+}
+
+div.left {
+  padding: 20px 20px 20px 30px;
+  text-align: left;
+}
+
+div.right {
+  text-align: left;
+  background-color: #FFFFFF;
+}
+
+section {
+  margin: 40px 0px;
+  min-height: 100px;
+
+  h2 {
+    font-size: 2.6rem;
   }
 
-  &__content {
-    color: var(--color-neutral-900);
-    margin-left: 20px;
+  label {
+    display: block;
+    margin: 7px 0px;
+    font-size: 1.8rem;
+    line-height: 2rem;
+  }
+}
+
+section.skills label {
+  border-bottom: 6px solid #FFFFFF;
+  line-height: 1.4;
+}
+
+div.right section h2 {
+  background-color: #A4E5E0;
+  padding: 5px;
+  padding-left: 20px
+}
+
+div.right section ul,
+div.right section div,
+div.right section h3,
+div.right section p,
+div.right section h1,
+div.right section label {
+  padding: 5px 20px;
+}
+
+ul,
+li,
+h1,
+h2,
+p,
+label,
+a,
+span {
+  color: #333333;
+}
+
+a {
+  line-height: 1.3rem;
+  border-bottom: 2px solid #333333;
+}
+
+div.right section ul {
+  padding-left: 30px;
+  margin-bottom: 20px;
+
+  li {
+    font-size: 1.8rem;
+    font-weight: 580;
+  }
+}
+
+div.right section p {
+  font-size: 1.8rem;
+  font-weight: 580;
+}
+
+div.right section.references {
+  label {
+    display: inline;
   }
 
-  &__title {
-    font-size: 1.6rem;
-    margin: 0;
+  div.box {
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+}
+
+div.right section div.time {
+  margin-top: 0px;
+  padding-top: 0px;
+
+  span {
+    color: #CCCCCC;
+  }
+}
+
+div.right section {
+  min-height: 60px;
+}
+
+div .right section.name {
+  h1 {
+    padding-bottom: 0px;
+    font-size: 4rem;
   }
 
-  &__text {
-    font-size: 1.4rem;
-    margin: 0;
-  }
-
-  &.success {
-    background: var(--color-green-100);
-    border-color: var(--color-green);
-  }
-
-  &.success &__content {
-    color: var(--color-green-900);
-  }
-
-  &.success &__icon {
-    background: var(--color-green-400);
-    color: var(--color-green-900);
-  }
-
-  &.info {
-    background: var(--color-blue-100);
-    border-color: var(--color-blue);
-  }
-
-  &.info &__content {
-    color: var(--color-blue-900);
-  }
-
-  &.info &__icon {
-    background: var(--color-blue-400);
-    color: var(--color-blue-900);
-  }
-
-  &.warning {
-    background: var(--color-yellow-100);
-    border-color: var(--color-yellow);
-  }
-
-  &.warning &__content {
-    color: var(--color-yellow-900);
-  }
-
-  &.warning &__icon {
-    background: var(--color-yellow-400);
-    color: var(--color-yellow-900);
-  }
-
-  &.error {
-    background: var(--color-red-100);
-    border-color: var(--color-red);
-  }
-
-  &.error &__content {
-    color: var(--color-red-900);
-  }
-
-  &.error &__icon {
-    background: var(--color-red-400);
-    color: var(--color-red-900);
+  label {
+    padding-top: 0px;
+    margin-top: 0px;
+    font-size: 2rem;
   }
 }

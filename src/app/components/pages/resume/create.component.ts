@@ -17,9 +17,10 @@ export class ResumeCreateComponent implements OnInit {
   on = {
     api_key: null,
     api_secret: null,
-    stage: 5,
+    stage: 7,
     skills: null,
     sample_id: 1,
+    preview: 0
   }
 
   list = {
@@ -95,11 +96,15 @@ export class ResumeCreateComponent implements OnInit {
     this.list.educations = this.list.educations.length ? this.list.educations : [{ ...this.data.education }]
     this.list.projects = this.list.projects.length ? this.list.projects : [{ ...this.data.project }]
     this.list.languages = this.list.languages.length ? this.list.languages : [{ ...this.data.language }]
-    this.list.languages = this.list.languages.length ? this.list.languages : [{ ...this.data.language }]
+    this.list.references = this.list.references.length ? this.list.references : [{ ...this.data.reference }]
+    setTimeout(() => {
+      this.onGenerate()
+    }, 1000);
     console.log('this.list', this.list);
   }
 
   onGenerate() {
+    this.on.preview = 1;
     const data = {
       background: this.list.backgrounds,
       experience: this.list.experiences,
@@ -110,7 +115,9 @@ export class ResumeCreateComponent implements OnInit {
       language: this.list.languages,
     }
 
-    localStorage.setItem('resume', JSON.stringify(data));
+
+    localStorage.setItem('resume', JSON.stringify({ ...data }));
+    data.skill = `${data.skill}`.split('\n').filter(v => v && v !== '');
 
     if (!this.data.sampleComponents[this.on.sample_id]) {
       const factory: ComponentFactory<SampleBaseComponent> =
@@ -118,6 +125,8 @@ export class ResumeCreateComponent implements OnInit {
       const componentRef = this.samplesVc.createComponent(factory);
       componentRef.instance.show = 1;
       this.data.sampleComponents[this.on.sample_id] = componentRef.instance;
+      this.data.sampleComponents[this.on.sample_id].receive(data)
+    } else {
       this.data.sampleComponents[this.on.sample_id].receive(data)
     }
 
@@ -196,6 +205,16 @@ export class ResumeCreateComponent implements OnInit {
     }
     console.log('skill.selected', skill.selected)
     this.on.skills = skills?.filter(v => v !== 'null')?.join('\n');
+  }
+
+  onDownloadPdf() {
+    console.log('this.data.sampleComponents', this.data.sampleComponents)
+    console.log('this.data.sampleComponents[this.on.sample_id]', this.data.sampleComponents[this.on.sample_id])
+    if (!!this.data.sampleComponents[this.on.sample_id]) {
+      this.data.sampleComponents[this.on.sample_id].downloadPdf()
+    } else {
+      this.message('error', 'Template missing.')
+    }
   }
 
   message(type, message, title = null) {

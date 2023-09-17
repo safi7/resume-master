@@ -1,41 +1,104 @@
-<div class="main">
-  <header>
-    <div class="header-left">
-      <h1>Your Name</h1>
-      <p>Web Developer</p>
+<div class="main" id="sample-main">
+  <div class="left">
+    <div class="sections">
+      <ng-container *ngFor="let each of data.background">
+        <section class="image">
+          <img *ngIf="each.image_url" src="each.image_url" alt="photo">
+        </section>
+
+
+        <section class="personal-info" *ngIf="each.phone||each.email||each.address">
+          <h2>Personal Info</h2>
+          <div class="personal">
+            <label>{{each.address}}</label>
+            <label>{{each.phone}}</label>
+            <label>{{each.email}}</label>
+          </div>
+        </section>
+      </ng-container>
+
+      <section class="projects" *ngIf="data.project.length">
+        <h2>Links</h2>
+        <ng-container *ngFor="let each of data.project">
+          <label><a href="each.link" target="each.link">{{each.title}}</a></label>
+        </ng-container>
+      </section>
+
+
+      <section class="skills" *ngIf="data.skill.length">
+        <h2>Skills</h2>
+        <ng-container *ngFor="let each of data.skill">
+          <label>{{each}}</label>
+        </ng-container>
+      </section>
+
+      <section class="langs" *ngIf="data.language.length">
+
+        <h2>Languages</h2>
+        <ng-container *ngFor="let each of data.language">
+          <label>{{each.name}}</label>
+        </ng-container>
+      </section>
+
     </div>
-    <div class="header-right">
-      <img src="profile-photo.jpg" alt="Profile Photo">
+  </div>
+  <div class="right">
+    <div class="sections">
+
+      <ng-container *ngFor="let each of data.background">
+        <section class="name" *ngIf="each.name">
+          <h1>{{each.name}}</h1>
+          <label>{{each.profession}}</label>
+        </section>
+
+
+        <section class="summary" *ngIf="each.background">
+          <h2>Summary</h2>
+          <p>{{each.background}}</p>
+        </section>
+      </ng-container>
+
+      <section *ngIf="data.experience.length" class="experience">
+        <h2>Experiences</h2>
+        <ng-container *ngFor="let each of data.experience">
+          <h3>{{[each.title,each.company, each.address].join(', ')}}</h3>
+          <div class="time">
+            <span>{{each.start}}</span>
+            <span *ngIf="!each.current"> - {{each.end}}</span>
+            <span *ngIf="each.current"> - Now</span>
+          </div>
+          <ul>
+            <ng-container *ngFor="let line of each.description.split('\n')">
+              <li>{{line}}</li>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </section>
+
+
+      <section class="education" *ngIf="data.education.length">
+        <h2>Educations</h2>
+        <ng-container *ngFor=" let each of data.education">
+
+          <h3>{{[[each.degree,each.field].join(' of '), each.university]}}</h3>
+          <div class="time">
+            <span>{{each.start}}</span>
+            <span *ngIf="!each.current"> - {{each.end}}</span>
+            <span *ngIf="each.current"> - Now</span>
+          </div>
+        </ng-container>
+      </section>
+
+      <section class="references" *ngIf="data.reference.length">
+        <h2>References</h2>
+        <ng-container *ngFor="let each of data.reference">
+          <div class="box">
+            <label>{{each.name}}</label>
+            <label>{{each.email}}</label>
+          </div>
+        </ng-container>
+      </section>
+
     </div>
-  </header>
-  <section>
-    <h2>About Me</h2>
-    <p>Your introduction here...</p>
-  </section>
-  <section>
-    <h2>Education</h2>
-    <div class="education-item">
-      <h3>Degree in Computer Science</h3>
-      <p>University Name, Graduation Year</p>
-    </div>
-    <!-- Add more education items as needed -->
-  </section>
-  <section>
-    <h2>Experience</h2>
-    <div class="experience-item">
-      <h3>Frontend Developer</h3>
-      <p>Company Name, Start Date - End Date</p>
-      <p>Job description here...</p>
-    </div>
-    <!-- Add more experience items as needed -->
-  </section>
-  <section>
-    <h2>Skills</h2>
-    <ul>
-      <li>HTML</li>
-      <li>CSS</li>
-      <li>JavaScript</li>
-      <!-- Add more skills here -->
-    </ul>
-  </section>
-</div>>
+  </div>
+</div>
