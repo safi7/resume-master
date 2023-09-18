@@ -127,6 +127,7 @@ export class ResumeCreateComponent implements OnInit {
       this.data.sampleComponents[this.on.sample_id] = componentRef.instance;
       this.data.sampleComponents[this.on.sample_id].receive(data)
     } else {
+      this.data.sampleComponents[this.on.sample_id].show = 1;
       this.data.sampleComponents[this.on.sample_id].receive(data)
     }
 
@@ -207,13 +208,23 @@ export class ResumeCreateComponent implements OnInit {
     this.on.skills = skills?.filter(v => v !== 'null')?.join('\n');
   }
 
+  onEdit() {
+    console.log('onEdit', this.data.sampleComponents[this.on.sample_id])
+    this.data.sampleComponents[this.on.sample_id].show = 0;
+    this.on.preview = 0;
+    this.on.stage = 1;
+  }
   onDownloadPdf() {
     console.log('this.data.sampleComponents', this.data.sampleComponents)
     console.log('this.data.sampleComponents[this.on.sample_id]', this.data.sampleComponents[this.on.sample_id])
     if (!!this.data.sampleComponents[this.on.sample_id]) {
-      this.data.sampleComponents[this.on.sample_id].downloadPdf()
+      try {
+        return this.data.sampleComponents[this.on.sample_id].downloadPdf()
+      } catch (err) {
+        console.log('errrrrrrrr', err);
+      }
     } else {
-      this.message('error', 'Template missing.')
+      return this.message('error', 'Template missing.')
     }
   }
 

@@ -193,7 +193,8 @@
           </ng-container>
         </div>
         <div class="btns" *ngIf="on.stage!==8">
-          <button class="button is-back" [disabled]="on.stage===1" (click)="onStage('before')"> <span>&larr;</span>
+          <button class="button is-secondary is-back" [disabled]="on.stage===1" (click)="onStage('before')">
+            <span>&larr;</span>
             Back</button>
           <button class="button is-primary" [disabled]="on.stage===8" (click)="onStage('next')">Next</button>
         </div>
@@ -206,7 +207,7 @@
 <div class="sample-container" [ngClass]="on.sample_id">
   <div class="sub-container">
     <div class="btns" *ngIf="on.preview">
-      <button class="button is-secondary" (click)="on.preview=0; on.stage=1;">Edit</button>
+      <button class="button is-secondary" (click)="onEdit()">Edit</button>
       <button class="button is-primary" (click)="onDownloadPdf()">Save</button>
     </div>
     <div class="sample">

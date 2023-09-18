@@ -1,6 +1,7 @@
-<div class="main" id="sample-main">
+<div class="main" id="sample" *ngIf="!!show" #sample>
   <div class="left">
     <div class="sections">
+      <span class="temp-top">TESSSSSSSSSSSSSSSSSSS</span>
       <ng-container *ngFor="let each of data.background">
         <section class="image">
           <img *ngIf="each.image_url" src="each.image_url" alt="photo">
@@ -39,7 +40,7 @@
           <label>{{each.name}}</label>
         </ng-container>
       </section>
-
+      <span class="temp-bot"></span>
     </div>
   </div>
   <div class="right">

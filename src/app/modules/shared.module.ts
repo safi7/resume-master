@@ -9,9 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SampleBaseComponent } from '../components/shared/samples/base.component';
-import {
-  Sample01Component
-} from '../components/shared/samples/index.component'
+import { Sample01Component } from '@components/shared/samples/index.component';
 
 @NgModule({
   declarations: [

@@ -44,7 +44,7 @@ export default class SampleBaseComponent implements OnInit {
     const pdf = new jsPDF('p', 'mm', 'a4');
 
     // Get the HTML element you want to convert to PDF
-    const elementToConvert = document.getElementById('sample-main'); // Replace 'elementId' with the ID of your HTML element
+    const elementToConvert = document.getElementById('sample'); // Replace 'elementId' with the ID of your HTML element
 
     // Use html2canvas to capture the HTML element as an image
     html2canvas(elementToConvert, { scale: 4 }).then((canvas) => {

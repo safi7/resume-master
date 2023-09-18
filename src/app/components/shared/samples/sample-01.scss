@@ -3,8 +3,14 @@
   max-width: 900px;
   min-width: 900px;
   background-color: #A4E5E0;
-  display: grid;
-  grid-template-columns: 3fr 7fr;
+  display: flex;
+  flex-direction: row;
+}
+
+.temp-top,
+.temp-bot {
+  display: none;
+  background-color: #A4E5E0;
 }
 
 p {
@@ -15,11 +21,14 @@ p {
 div.left {
   padding: 20px 20px 20px 30px;
   text-align: left;
+  background-color: #A4E5E0;
+  width: 250px;
 }
 
 div.right {
   text-align: left;
   background-color: #FFFFFF;
+  width: 650px;
 }
 
 section {
@@ -49,7 +58,10 @@ div.right section h2 {
   padding-left: 20px
 }
 
-div.right section ul,
+div.right section ul {
+  margin: 5px 20px;
+}
+
 div.right section div,
 div.right section h3,
 div.right section p,
@@ -75,7 +87,7 @@ a {
 }
 
 div.right section ul {
-  padding-left: 30px;
+  padding-left: 10px;
   margin-bottom: 20px;
 
   li {
@@ -123,5 +135,123 @@ div .right section.name {
     padding-top: 0px;
     margin-top: 0px;
     font-size: 2rem;
+  }
+}
+
+@media print {
+  body {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .main {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    display: flex;
+  }
+
+  div.left {
+    min-width: 270px;
+    float: left;
+  }
+
+  div.right {
+    min-width: 900px;
+    width: calc(70% - 5px);
+    margin-bottom: 50px !important;
+  }
+
+  div.right {
+    section h2 {
+      background-color: #A4E5E0;
+      padding-left: 290px
+    }
+  }
+
+  div.right section ul,
+  div.right section div,
+  div.right section h3,
+  div.right section p,
+  div.right section h1,
+  div.right section label {
+    padding-left: 290px;
+  }
+
+  div.right section.name {
+    h1 {
+      padding-bottom: 0px;
+      font-size: 4rem;
+    }
+
+    label {
+      padding-top: 0px;
+      margin-top: 0px;
+      font-size: 2rem;
+    }
+  }
+
+  div.right section.references {
+    label {
+      display: inline-block;
+      min-width: 300px;
+      padding-left: 20px;
+      padding-top: 0px;
+      margin-top: 0px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    }
+  }
+
+  div.left .temp-top {
+    display: block;
+    height: 70px;
+    width: 270px;
+    margin-top: -80px;
+    margin-left: -30px;
+  }
+
+  div.left .temp-bot {
+    display: block;
+    height: 55px;
+    width: 270px;
+    margin-bottom: -30px;
+    margin-left: -30px;
+  }
+}
+
+/* Define CSS for print */
+@media print {
+  :root {
+    --print-margin-top: 0;
+    /* Set top margin to 0 */
+    --print-margin-right: 0;
+    /* Set right margin to 0 */
+    --print-margin-bottom: 0;
+    /* Set bottom margin to 0 */
+    --print-margin-left: 0;
+    /* Set left margin to 0 */
+  }
+
+  /* Define page size and margins */
+  @page {
+    size: auto;
+    margin: var(--print-margin-top) var(--print-margin-right) var(--print-margin-bottom) var(--print-margin-left);
+  }
+
+  /* Hide headers and footers */
+  @page {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Chrome, Safari, and newer versions of Edge */
+  @media print {
+
+    body::before,
+    body::after {
+      content: none !important;
+      /* Hide headers and footers */
+    }
   }
 }
