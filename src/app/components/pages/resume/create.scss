@@ -20,8 +20,8 @@ form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    min-height: 750px;
-    max-height: 750px;
+    min-height: 800px;
+    max-height: 800px;
     overflow-y: auto;
 
 
@@ -116,6 +116,71 @@ div.skill:first-child {
     border-top: 0px;
 }
 
+div.list-experiences {
+    width: 100%;
+    margin-top: 20px;
+    max-height: 150px;
+    height: 100px;
+    overflow-y: auto;
+    cursor: pointer;
+    border: 1.5px solid var(--color-neutral-300);
+    padding: 10px;
+
+    div.exp-container {
+        border-radius: 20px;
+        border: 3px solid var(--color-blue-100);
+        width: 100%;
+        height: max-content;
+        padding: 0px;
+        padding: 10px;
+        margin-bottom: 10px;
+
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        color: var(--color-black-400);
+    }
+
+    .time {
+        font-size: 1.3rem;
+        color: var(--color-black-200);
+    }
+}
+
+div.list-educations {
+    width: 100%;
+    margin-top: 20px;
+    max-height: 150px;
+    height: 100px;
+    overflow-y: auto;
+    cursor: pointer;
+    border: 1.5px solid var(--color-neutral-300);
+    padding: 10px;
+
+    div.edu-container {
+        border-radius: 20px;
+        border: 3px solid var(--color-blue-100);
+        width: 100%;
+        height: max-content;
+        padding: 0px;
+        padding: 10px;
+        margin-bottom: 10px;
+
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        color: var(--color-black-400);
+    }
+
+    .time {
+        font-size: 1.3rem;
+        color: var(--color-black-200);
+    }
+}
+
+
 button.add {
     background-color: var(--color-blue-800);
     color: white;
@@ -163,14 +228,13 @@ button.added {
     width: 100%;
     text-align: center;
     justify-content: center;
-    padding: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     background-color: #FFF1EE;
 
     div.sub-container {
-        width: 900px;
+        width: 800px;
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -181,6 +245,151 @@ button.added {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 5px 20px;
+        padding: 20px 20px;
+        border: 5px solid var(--color-primary);
+        border-radius: 10px;
+        margin-top: 1px;
+        align-items: baseline;
+
+    }
+
+    div.colors-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    div.colors-sub-container {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    div.colors div {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-color: var(--color-black);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+        text-align: center;
+
+        &.bg-color-01 {
+            background-color: var(--color-sample-bg-01);
+        }
+
+        &.bg-color-02 {
+            background-color: var(--color-sample-bg-02);
+        }
+
+        &.bg-color-03 {
+            background-color: var(--color-sample-bg-03);
+        }
+
+        &.bg-color-04 {
+            background-color: var(--color-sample-bg-04);
+        }
+
+        &.bg-color-05 {
+            background-color: var(--color-sample-bg-05);
+        }
+
+        &.bg-color-06 {
+            background-color: var(--color-sample-bg-06);
+        }
+
+        &.bg-color-07 {
+            background-color: var(--color-sample-bg-07);
+        }
+
+        &.bg-color-08 {
+            background-color: var(--color-sample-bg-08);
+        }
+
+        &.bg-color-09 {
+            background-color: var(--color-sample-bg-09);
+        }
+
+        &.bg-color-10 {
+            background-color: var(--color-sample-bg-10);
+        }
+
+
+        &.lb-color-01 {
+            background-color: var(--color-sample-lb-01);
+        }
+
+        &.lb-color-02 {
+            background-color: var(--color-sample-lb-02);
+        }
+
+        &.lb-color-03 {
+            background-color: var(--color-sample-lb-03);
+        }
+
+        &.lb-color-04 {
+            background-color: var(--color-sample-lb-04);
+        }
+
+        &.lb-color-05 {
+            background-color: var(--color-sample-lb-05);
+        }
+
+        &.lb-color-06 {
+            background-color: var(--color-sample-lb-06);
+        }
+
+        &.lb-color-07 {
+            background-color: var(--color-sample-lb-07);
+        }
+
+        &.lb-color-08 {
+            background-color: var(--color-sample-lb-08);
+        }
+
+        &.lb-color-09 {
+            background-color: var(--color-sample-lb-09);
+        }
+
+        &.lb-color-10 {
+            background-color: var(--color-sample-lb-10);
+        }
+
+
+    }
+
+    div.colors label.selected {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        font-size: 2.5rem;
+    }
+
+    div.colors label.selected2 {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        font-size: 2.5rem;
+    }
+
+    div.colors label.selected::before {
+        display: inline-block;
+        content: "\2713";
+        color: var(--color-white);
+    }
+
+    div.colors label.selected2::before {
+        display: inline-block;
+        content: "\2713";
+        color: var(--color-black);
+    }
+
+    div.colors label:hover {
+        transform: translateY(-2px);
+        border-radius: 5px;
     }
 }

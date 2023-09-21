@@ -6,6 +6,8 @@ import _ from 'lodash';
 import ZetyService from '@services/zety.service';
 import samples from '@configs/samples';
 import { SampleBaseComponent } from '../../shared/samples/base.component';
+import objectHash from 'object-hash';
+import colors from '@configs/colors';
 
 @Component({
   selector: 'app-resume-create',
@@ -14,55 +16,37 @@ import { SampleBaseComponent } from '../../shared/samples/base.component';
 })
 export class ResumeCreateComponent implements OnInit {
   @ViewChild('samples', { read: ViewContainerRef }) samplesVc: ViewContainerRef;
+
+  sample_resume_info = { "background": [{ "name": "Qandagha Safi", "profession": "Web Developer", "email": "1192safi@gmail.com", "phone": "+601123270509", "background": "As a team-oriented and skilled Computer Science graduate with\nover 4 years of progressive experience in software engineering and web development, I am eager to seek a challenging position in your esteemed organization. As an Afghan national who has studied and worked in Malaysia, I am available to start working immediately. ", "address": "B-16-02, Residence 1, Plaza @ Kelana Jaya Residence,  No.9 Jalan SS7/13B, 47301,  Petaling Jaya" }], "experience": [{ "title": "Web developer", "company": "MYCN Technology Management Sdn Bhd", "address": "Kuala Lumpur", "start": "2019-06-01", "end": "2023-08-31", "description": "I have been working on a large and complex project. My key responsibilities and achievements include:\nWriting reusable and clean programing code to develop 12/18 web and backend services.\nWorking on frontend and backend using Nodejs, Angular, Mongodb, Redis, Zookeeper", "current": false }, { "title": "Web developer", "company": "Tektician Sdn Bhd", "address": "Perak", "start": "2019-01-15", "end": "2019-06-01", "description": " My main responsibilities and achievements include:\nEnhancing customizing ERPnext components \nWriting clean frontend and backend code for features.", "current": false }], "education": [{ "university": "IIUM", "address": "Kuala Lumpur", "degree": "Bachelor's", "field": "Computer Science", "start": "2014-06-20", "end": "2019-01-01", "current": false }, { "university": "IIUM", "address": "Kuala Lumpur", "degree": "Master's", "field": "Information Technology ", "start": "2021-03-10", "end": "2023-08-01", "current": false }], "skill": "JavaScript\nNodeJS\nAngular\nHTML\nCSS\nRedis\nMongodb\nProblem-solving\nLeadership", "project": [{ "title": "Bursa Articles", "link": "http://bursa.tektician.com/" }, { "title": "Setia Awan", "link": "https://setiaawan.com/" }, { "title": "Office Admin", "link": "https://www.ugoffice.com/login" }, { "title": "Sports Informations", "link": "https://www.sportsinformations.com/login" }], "reference": [{ "name": "Jonathan Lee", "email": "jonathan@tektician.com" }, { "name": "Gan Chu Hang", "email": "hgun77@gmail.com" }], "language": [{ "name": "English" }, { "name": "Pashto" }, { "name": "Persian" }] }
   on = {
     api_key: null,
     api_secret: null,
     stage: 7,
     skills: null,
     sample_id: 1,
-    preview: 0
+    preview: 0,
+    bg_color: 'bg-color-01',
+    lb_color: 'lb-color-01'
   }
 
   list = {
     skills: [
-      { id: 1, name: 'XXXXXXXXX' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
-      { id: 2, name: 'YYYYYYYYY' },
     ],
     backgrounds: [],
     experiences: [],
     educations: [],
     projects: [],
     references: [],
-    languages: []
+    languages: [],
+    bgColors: colors.bgColors,
+    lbColors: colors.lbColors
   }
 
   data = {
     credential: {},
     background: { name: null, profession: null, email: null, phone: null, background: null, address: null, },
-    experience: { title: null, company: null, address: null, start: null, end: null, description: null, current: false },
-    education: { university: null, address: null, degree: null, field: null, start: null, end: null, current: false },
+    experience: { edit: true, title: null, company: null, address: null, start: null, end: null, description: null, current: false },
+    education: { edit: true, university: null, address: null, degree: null, field: null, start: null, end: null, current: false },
     project: { title: null, link: null },
     reference: { name: null, email: null },
     language: { name: null },
@@ -97,9 +81,10 @@ export class ResumeCreateComponent implements OnInit {
     this.list.projects = this.list.projects.length ? this.list.projects : [{ ...this.data.project }]
     this.list.languages = this.list.languages.length ? this.list.languages : [{ ...this.data.language }]
     this.list.references = this.list.references.length ? this.list.references : [{ ...this.data.reference }]
-    setTimeout(() => {
-      this.onGenerate()
-    }, 1000);
+    this.checkEditable();
+    // setTimeout(() => {
+    //   this.onGenerate()
+    // }, 1000);
     console.log('this.list', this.list);
   }
 
@@ -124,10 +109,14 @@ export class ResumeCreateComponent implements OnInit {
         this.resolver.resolveComponentFactory(samples[this.on.sample_id]);
       const componentRef = this.samplesVc.createComponent(factory);
       componentRef.instance.show = 1;
+      componentRef.instance.bg_sample_color = this.on.bg_color;
+      componentRef.instance.lb_sample_color = this.on.lb_color;
       this.data.sampleComponents[this.on.sample_id] = componentRef.instance;
       this.data.sampleComponents[this.on.sample_id].receive(data)
     } else {
       this.data.sampleComponents[this.on.sample_id].show = 1;
+      this.data.sampleComponents[this.on.sample_id].bg_sample_color = this.on.bg_color;
+      this.data.sampleComponents[this.on.sample_id].lb_sample_color = this.on.lb_color;
       this.data.sampleComponents[this.on.sample_id].receive(data)
     }
 
@@ -162,10 +151,14 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   onRemove() {
-    console.log('onAdd', this.on);
     switch (this.on.stage) {
-      case 2: this.list.experiences.pop(); break;
-      case 3: this.list.educations.pop(); break;
+      case 2:
+        this.list.experiences.pop();
+        this.list.experiences[this.list.experiences.length - 1] ? this.list.experiences[this.list.experiences.length - 1].edit = 1 : 0;
+        break;
+      case 3:
+        this.list.educations.pop();
+        this.list.educations[this.list.educations.length - 1] ? this.list.educations[this.list.educations.length - 1].edit = 1 : 0; break;
       case 5: this.list.projects.pop(); break;
       case 6: this.list.languages.pop(); break;
       case 7: this.list.references.pop(); break;
@@ -173,12 +166,17 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   onAdd() {
-    console.log('onAdd', this.on);
     if (!this.checkStageFilled()) { return this.message('error', 'Please fill up required fields.') }
 
     switch (this.on.stage) {
-      case 2: this.list.experiences.push({ ...this.data.experience }); break;
-      case 3: this.list.educations.push({ ...this.data.education }); break;
+      case 2:
+        this.list.experiences.push({ ...this.data.experience });
+        this.list.experiences[this.list.experiences.length - 2].edit = 0;
+        break;
+      case 3:
+        this.list.educations.push({ ...this.data.education });
+        this.list.educations[this.list.educations.length - 2].edit = 0;
+        break;
       case 5: this.list.projects.push({ ...this.data.project }); break;
       case 6: this.list.languages.push({ ...this.data.language }); break;
       case 7: this.list.references.push({ ...this.data.reference }); break;
@@ -193,7 +191,6 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   onSkill(skill) {
-    console.log('onSkill', skill);
     let skills = _.cloneDeep(this.on.skills);
     skill.selected = !skill.selected;
     switch (skill.selected) {
@@ -208,20 +205,43 @@ export class ResumeCreateComponent implements OnInit {
     this.on.skills = skills?.filter(v => v !== 'null')?.join('\n');
   }
 
+  onExpEdit(exp) {
+    const dd = this.list.experiences.find(v => objectHash(_.omit(v, ['edit'])) === objectHash(_.omit(exp, ['edit'])))
+    this.list.experiences = this.list.experiences.filter(v => objectHash(v) !== objectHash(this.data.experience)).map(v => ({ ...v, edit: objectHash(_.omit(v, ['edit'])) === objectHash(_.omit(exp, ['edit'])) ? true : false }));
+  }
+
+  onEduEdit(exp) {
+    const dd = this.list.educations.find(v => objectHash(_.omit(v, ['edit'])) === objectHash(_.omit(exp, ['edit'])))
+    this.list.educations = this.list.educations.filter(v => objectHash(v) !== objectHash(this.data.education)).map(v => ({ ...v, edit: objectHash(_.omit(v, ['edit'])) === objectHash(_.omit(exp, ['edit'])) ? true : false }));
+
+  }
+
   onEdit() {
-    console.log('onEdit', this.data.sampleComponents[this.on.sample_id])
     this.data.sampleComponents[this.on.sample_id].show = 0;
     this.on.preview = 0;
     this.on.stage = 1;
   }
+
+  onBgColor(color) {
+    this.on.bg_color = color
+    if (!!this.data.sampleComponents[this.on.sample_id]) {
+      this.data.sampleComponents[this.on.sample_id].bg_sample_color = this.on.bg_color
+    }
+  }
+
+  onLbColor(color) {
+    this.on.lb_color = color
+    if (!!this.data.sampleComponents[this.on.sample_id]) {
+      this.data.sampleComponents[this.on.sample_id].lb_sample_color = this.on.lb_color
+    }
+  }
+
   onDownloadPdf() {
-    console.log('this.data.sampleComponents', this.data.sampleComponents)
-    console.log('this.data.sampleComponents[this.on.sample_id]', this.data.sampleComponents[this.on.sample_id])
     if (!!this.data.sampleComponents[this.on.sample_id]) {
       try {
         return this.data.sampleComponents[this.on.sample_id].downloadPdf()
       } catch (err) {
-        console.log('errrrrrrrr', err);
+        return this.message('error', 'Something went wrong :(')
       }
     } else {
       return this.message('error', 'Template missing.')
@@ -237,7 +257,6 @@ export class ResumeCreateComponent implements OnInit {
 
   checkStageFilled() {
     let latest = null;
-    console.log('this.on.stage', this.on.stage);
     switch (this.on.stage) {
 
       case 1:
@@ -295,5 +314,26 @@ export class ResumeCreateComponent implements OnInit {
     return this.zetyS.getSkills(params)
   }
 
-  const
+  checkEditable() {
+    if (!this.list.experiences.find(v => v.edit)) {
+      this.list.experiences[this.list.experiences.length - 1] = { ...this.list.experiences[this.list.experiences.length - 1], edit: true }
+    }
+    if (!this.list.educations.find(v => v.edit)) {
+      this.list.educations[this.list.educations.length - 1] = { ...this.list.educations[this.list.educations.length - 1], edit: true }
+    }
+
+    if (this.list.experiences.filter(v => v.edit).length > 1) {
+      this.list.experiences = this.list.experiences.map(v => ({ ...v, edit: false }))
+      this.list.experiences[this.list.experiences.length - 1] = { ...this.list.experiences[this.list.experiences.length - 1], edit: true }
+    }
+
+    if (this.list.educations.filter(v => v.edit).length > 1) {
+      this.list.educations = this.list.educations.map(v => ({ ...v, edit: false }))
+      this.list.educations[this.list.educations.length - 1] = { ...this.list.educations[this.list.educations.length - 1], edit: true }
+    }
+  }
+
+  formatMergeItems(list) {
+    return list.filter(v => v).join(' ,')
+  }
 }

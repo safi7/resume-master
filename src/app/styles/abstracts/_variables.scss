@@ -64,9 +64,10 @@ $color-teal-200: shades($color-teal, 200);
 $color-teal-300: shades($color-teal, 300);
 $color-teal-400: shades($color-teal, 400);
 
+$color-sample: shades($color-teal, 400);
 
 // Fonts
 $font-default-stack: 'Source Sans Pro',
-sans-serif;
+    sans-serif;
 $font-digit-stack: 'Roboto Condensed',
-sans-serif;
+    sans-serif;

@@ -33,10 +33,26 @@
           </ng-container>
           <ng-container *ngSwitchCase="2">
             <h1>Experiences</h1>
-            <ng-container *ngFor="let each of list.experiences; let i=index;">
-              <ng-container *ngIf="!!list.experiences[i+1]">
+            <div class="list-experiences">
+              <ng-container *ngFor="let each of list.experiences; let i=index;">
+                <ng-container *ngIf="!each.edit">
+                  <div class="exp-container" (click)="onExpEdit(each)">
+                    <h3>{{formatMergeItems([each.title,each.company, each.address])}}</h3>
+                    <div class="time">
+                      <span>{{each.start}}</span>
+                      <span *ngIf="!each.current"> - {{each.end}}</span>
+                      <span *ngIf="each.current"> - Now</span>
+                    </div>
+                    <div class="exp-desc">
+                      {{each.description}}
+                    </div>
+                  </div>
+                </ng-container>
               </ng-container>
-              <ng-container *ngIf="!list.experiences[i+1]">
+            </div>
+
+            <ng-container *ngFor="let each of list.experiences; let i=index;">
+              <ng-container *ngIf="each.edit">
                 <div class="hbox">
                   <label for="jobTitle">Job Title:</label>
                   <label for="employer">Employer:</label>
@@ -78,10 +94,23 @@
 
           <ng-container *ngSwitchCase="3">
             <h1>Education</h1>
-            <ng-container *ngFor="let each of list.educations; let i=index;">
-              <ng-container *ngIf="!!list.educations[i+1]">
+            <div class="list-educations">
+              <ng-container *ngFor="let each of list.educations; let i=index;">
+                <ng-container *ngIf="!each.edit">
+                  <div class="edu-container" (click)="onEduEdit(each)">
+                    <div class="name">{{formatMergeItems([each.degree, each.field, each.university])}}</div>
+                    <div class="address">{{each.address}}</div>
+                    <div class="time">
+                      <span *ngIf="each.start">{{each.start}}</span>
+                      <span *ngIf="each.current"> - Now</span>
+                      <span *ngIf="each.end && !each.current"> - {{each.end}}</span>
+                    </div>
+                  </div>
+                </ng-container>
               </ng-container>
-              <ng-container *ngIf="!list.educations[i+1]">
+            </div>
+            <ng-container *ngFor="let each of list.educations; let i=index;">
+              <ng-container *ngIf="each.edit">
                 <div class="hbox">
                   <label for="schoolName">School Name:</label>
                   <label for="schoolAddress">School Address:</label>
@@ -192,7 +221,7 @@
             </div>
           </ng-container>
         </div>
-        <div class="btns" *ngIf="on.stage!==8">
+        <div class="btns">
           <button class="button is-secondary is-back" [disabled]="on.stage===1" (click)="onStage('before')">
             <span>&larr;</span>
             Back</button>
@@ -207,8 +236,27 @@
 <div class="sample-container" [ngClass]="on.sample_id">
   <div class="sub-container">
     <div class="btns" *ngIf="on.preview">
-      <button class="button is-secondary" (click)="onEdit()">Edit</button>
-      <button class="button is-primary" (click)="onDownloadPdf()">Save</button>
+      <button class="button is-secondary" (click)="onEdit()">&#x270E; Edit</button>
+      <div class="colors-container">
+        <div class="colors-sub-container">
+          <div class="colors" *ngFor="let each of list.bgColors">
+            <div [ngClass]="each" (click)="onBgColor(each)">
+              <label [ngClass]="{selected: each===on.bg_color}">
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="colors-sub-container">
+          <div class="colors" *ngFor="let each of list.lbColors">
+            <div [ngClass]="each" (click)="onLbColor(each)">
+              <label [ngClass]="{selected2: each===on.lb_color}">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="button is-primary" (click)="onDownloadPdf()">&#x2193; Save</button>
     </div>
     <div class="sample">
       <ng-container #samples></ng-container>

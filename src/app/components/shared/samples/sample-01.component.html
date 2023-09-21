@@ -1,7 +1,6 @@
-<div class="main" id="sample" *ngIf="!!show" #sample>
-  <div class="left">
+<div class="main" id="sample" *ngIf="!!show" #sample [ngClass]="bg_sample_color">
+  <div class="left" [ngClass]="bg_sample_color">
     <div class="sections">
-      <span class="temp-top">TESSSSSSSSSSSSSSSSSSS</span>
       <ng-container *ngFor="let each of data.background">
         <section class="image">
           <img *ngIf="each.image_url" src="each.image_url" alt="photo">
@@ -9,38 +8,37 @@
 
 
         <section class="personal-info" *ngIf="each.phone||each.email||each.address">
-          <h2>Personal Info</h2>
+          <h2 [ngClass]="lb_sample_color">Personal Info</h2>
           <div class="personal">
-            <label>{{each.address}}</label>
-            <label>{{each.phone}}</label>
-            <label>{{each.email}}</label>
+            <label [ngClass]="lb_sample_color">{{each.address}}</label>
+            <label [ngClass]="lb_sample_color">{{each.phone}}</label>
+            <label [ngClass]="lb_sample_color">{{each.email}}</label>
           </div>
         </section>
       </ng-container>
 
       <section class="projects" *ngIf="data.project.length">
-        <h2>Links</h2>
+        <h2 [ngClass]="lb_sample_color">Links</h2>
         <ng-container *ngFor="let each of data.project">
-          <label><a href="each.link" target="each.link">{{each.title}}</a></label>
+          <label><a [ngClass]="lb_sample_color" href="each.link" target="each.link">{{each.title}}</a></label>
         </ng-container>
       </section>
 
 
       <section class="skills" *ngIf="data.skill.length">
-        <h2>Skills</h2>
+        <h2 [ngClass]="lb_sample_color">Skills</h2>
         <ng-container *ngFor="let each of data.skill">
-          <label>{{each}}</label>
+          <label [ngClass]="lb_sample_color">{{each}}</label>
         </ng-container>
       </section>
 
       <section class="langs" *ngIf="data.language.length">
 
-        <h2>Languages</h2>
+        <h2 [ngClass]="lb_sample_color">Languages</h2>
         <ng-container *ngFor="let each of data.language">
-          <label>{{each.name}}</label>
+          <label [ngClass]="lb_sample_color">{{each.name}}</label>
         </ng-container>
       </section>
-      <span class="temp-bot"></span>
     </div>
   </div>
   <div class="right">
@@ -54,13 +52,17 @@
 
 
         <section class="summary" *ngIf="each.background">
-          <h2>Summary</h2>
+          <label class="h2-container" [ngClass]="bg_sample_color">
+            <h2 [ngClass]="lb_sample_color">Summary</h2>
+          </label>
           <p>{{each.background}}</p>
         </section>
       </ng-container>
 
       <section *ngIf="data.experience.length" class="experience">
-        <h2>Experiences</h2>
+        <label class="h2-container" [ngClass]="bg_sample_color">
+          <h2 [ngClass]="lb_sample_color">Experiences</h2>
+        </label>
         <ng-container *ngFor="let each of data.experience">
           <h3>{{[each.title,each.company, each.address].join(', ')}}</h3>
           <div class="time">
@@ -76,11 +78,11 @@
         </ng-container>
       </section>
 
-
       <section class="education" *ngIf="data.education.length">
-        <h2>Educations</h2>
+        <label class="h2-container" [ngClass]="bg_sample_color">
+          <h2 [ngClass]="lb_sample_color">Educations</h2>
+        </label>
         <ng-container *ngFor=" let each of data.education">
-
           <h3>{{[[each.degree,each.field].join(' of '), each.university]}}</h3>
           <div class="time">
             <span>{{each.start}}</span>
@@ -91,11 +93,13 @@
       </section>
 
       <section class="references" *ngIf="data.reference.length">
-        <h2>References</h2>
+        <label class="h2-container" [ngClass]="bg_sample_color">
+          <h2 [ngClass]="lb_sample_color">References</h2>
+        </label>
         <ng-container *ngFor="let each of data.reference">
           <div class="box">
-            <label>{{each.name}}</label>
-            <label>{{each.email}}</label>
+            <label class="info">{{each.name}}</label>
+            <label class="info">{{each.email}}</label>
           </div>
         </ng-container>
       </section>

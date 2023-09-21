@@ -47,6 +47,7 @@
     "ng-lazyload-image": "^9.1.2",
     "ng-select2": "^1.4.1",
     "normalize.css": "^8.0.1",
+    "object-hash": "^3.0.0",
     "pdfmake": "^0.2.7",
     "select2": "^4.0.0",
     "tether": "^1.4.7",
