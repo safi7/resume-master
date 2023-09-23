@@ -2,6 +2,12 @@
   <div class="main">
     <div class="container">
       <app-message></app-message>
+      <div class="progress-bar">
+        <label *ngFor="let stage of list.stages" [ngClass]="{completed: stage.completed}">
+          <span></span> <i *ngIf="!stage.completed" class="fa-regular fa-circle"></i>
+          <i *ngIf="!!stage.completed" class="fa-solid fa-circle"></i>
+        </label>
+      </div>
       <form>
         <div [ngSwitch]="on.stage" class="stages">
           <ng-container *ngSwitchCase="1">
@@ -33,7 +39,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="2">
             <h1>Experiences</h1>
-            <div class="list-experiences">
+            <div class="list-experiences" *ngIf="getListable(list.experiences)">
               <ng-container *ngFor="let each of list.experiences; let i=index;">
                 <ng-container *ngIf="!each.edit">
                   <div class="exp-container" (click)="onExpEdit(each)">
@@ -94,7 +100,7 @@
 
           <ng-container *ngSwitchCase="3">
             <h1>Education</h1>
-            <div class="list-educations">
+            <div class="list-educations" *ngIf="getListable(list.educations)">
               <ng-container *ngFor="let each of list.educations; let i=index;">
                 <ng-container *ngIf="!each.edit">
                   <div class="edu-container" (click)="onEduEdit(each)">

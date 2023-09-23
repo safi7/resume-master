@@ -21,12 +21,12 @@ export class ResumeCreateComponent implements OnInit {
   on = {
     api_key: null,
     api_secret: null,
-    stage: 7,
+    stage: 1,
     skills: null,
     sample_id: 1,
     preview: 0,
     bg_color: 'bg-color-01',
-    lb_color: 'lb-color-01'
+    lb_color: 'lb-color-01',
   }
 
   list = {
@@ -39,7 +39,8 @@ export class ResumeCreateComponent implements OnInit {
     references: [],
     languages: [],
     bgColors: colors.bgColors,
-    lbColors: colors.lbColors
+    lbColors: colors.lbColors,
+    stages: [{ id: 1, completed: false }, { id: 2, completed: false }, { id: 3, completed: false }, { id: 4, completed: false }, { id: 5, completed: false }, { id: 6, completed: false }, { id: 7, completed: false }]
   }
 
   data = {
@@ -62,13 +63,34 @@ export class ResumeCreateComponent implements OnInit {
     if (resume) {
       for (let [key, value] of _.entries(JSON.parse(resume))) {
         switch (key) {
-          case 'background': value.map(v => this.list.backgrounds.push(v)); break;
-          case 'experience': value.map(v => this.list.experiences.push(v)); break;
-          case 'education': value.map(v => this.list.educations.push(v)); break;
-          case 'project': value.map(v => this.list.projects.push(v)); break;
-          case 'language': value.map(v => this.list.languages.push(v)); break;
-          case 'skill': this.on.skills = value; break;
-          case 'reference': value.map(v => this.list.references.push(v)); break;
+          case 'background':
+            this.list.stages[0].completed = !!value.find(v => objectHash(this.data.background) !== objectHash(v))
+            value.map(v => this.list.backgrounds.push(v));
+            break;
+          case 'experience':
+            this.list.stages[1].completed = !!value.find(v => objectHash(this.data.experience) !== objectHash(v))
+            value.map(v => this.list.experiences.push(v));
+            break;
+          case 'education':
+            this.list.stages[2].completed = !!value.find(v => objectHash(this.data.education) !== objectHash(v))
+            value.map(v => this.list.educations.push(v));
+            break;
+          case 'skill':
+            this.list.stages[3].completed = !!value
+            this.on.skills = value;
+            break;
+          case 'project':
+            this.list.stages[4].completed = !!value.find(v => objectHash(this.data.project) !== objectHash(v))
+            value.map(v => this.list.projects.push(v));
+            break;
+          case 'language':
+            this.list.stages[5].completed = !!value.find(v => objectHash(this.data.language) !== objectHash(v))
+            value.map(v => this.list.languages.push(v));
+            break;
+          case 'reference':
+            this.list.stages[6].completed = !!value.find(v => objectHash(this.data.reference) !== objectHash(v))
+            value.map(v => this.list.references.push(v));
+            break;
         }
       }
     }
@@ -123,7 +145,6 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   onStage(stage) {
-
     if (stage === 'next') {
       switch (this.on.stage) {
         case 1: if (!this.checkStageFilled()) { return window.alert('Please enter personal information.') }; break;
@@ -135,9 +156,14 @@ export class ResumeCreateComponent implements OnInit {
       }
     }
 
+    console.log('this.list.stages', this.on.stage, this.list.stages);
+
     switch (stage) {
       case 'before': this.on.stage > 1 ? this.on.stage -= 1 : 1; break;
-      case 'next': this.on.stage < 8 ? this.on.stage += 1 : 8; break;
+      case 'next':
+        this.on.stage < 8 ? this.on.stage += 1 : 8;
+        this.list.stages.find(v => v.id === this.on.stage - 1).completed = true;
+        break;
     }
 
     if (this.on.stage === 2) {
@@ -181,9 +207,6 @@ export class ResumeCreateComponent implements OnInit {
       case 6: this.list.languages.push({ ...this.data.language }); break;
       case 7: this.list.references.push({ ...this.data.reference }); break;
     }
-
-    console.log('this.list.projects', _.cloneDeep(this.list.projects));
-
   }
 
   onSkills() {
@@ -201,7 +224,6 @@ export class ResumeCreateComponent implements OnInit {
         skills = skills;
         break;
     }
-    console.log('skill.selected', skill.selected)
     this.on.skills = skills?.filter(v => v !== 'null')?.join('\n');
   }
 
@@ -261,7 +283,6 @@ export class ResumeCreateComponent implements OnInit {
 
       case 1:
         latest = this.list.backgrounds[this.list.backgrounds.length - 1];
-        console.log('latest', latest);
         if (!latest) { return false }
         if (!(latest.name && latest.profession && latest.phone && latest.background)) { return false }
         return true;
@@ -335,5 +356,8 @@ export class ResumeCreateComponent implements OnInit {
 
   formatMergeItems(list) {
     return list.filter(v => v).join(' ,')
+  }
+  getListable(array) {
+    return !!array.filter(v => !v.edit).length;
   }
 }

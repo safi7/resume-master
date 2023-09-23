@@ -1,0 +1,60 @@
+/* Apply a stylish font and style to the entire document */
+body {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Style the resume heading with a larger font size and bold text */
+h1 {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* Dark gray color */
+}
+
+/* Style section headings with an italicized font */
+h2 {
+    font-style: Helvetica Neue;
+    font-size: 22px;
+
+
+    /* Slightly lighter gray color */
+}
+
+/* Apply a different font to emphasize the section titles */
+h3 {
+    font-family: "Georgia", serif;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Style the main content of the resume */
+p {
+    text-align: justify;
+    /* Light gray text */
+}
+
+
+/* Style links to make them stand out */
+a {
+    /* Blue link color */
+    text-decoration: none;
+    transition: border-bottom 0.2s;
+}
+
+/* Apply a background color to code snippets */
+code {
+    font-family: "Courier New", monospace;
+}
+
+/* Add a subtle border to images */
+img {
+    border: 1px solid #ccc;
+}
+
+/* Customize blockquotes */
+blockquote {
+    font-style: italic;
+}
