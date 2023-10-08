@@ -1,0 +1,41 @@
+.container {
+    min-width: 600px;
+    // background-color: var(--color-neutral-200);
+}
+
+div.btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* app.component.css */
+.quill {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+:host ::ng-deep {
+    .ql-toolbar {
+        width: 100%;
+    }
+
+    .ql-toolbar span i {
+        cursor: pointer;
+    }
+
+    .ql-toolbar span i:hover {
+        color: blue
+    }
+
+    .ql-container {
+        height: 300px;
+        width: 100%;
+    }
+
+    div.ql-editor {
+        width: 100%;
+        caret-color: initial !important;
+    }
+}

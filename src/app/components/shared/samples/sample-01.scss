@@ -38,11 +38,6 @@ section {
   }
 }
 
-section.skills label {
-  border-bottom: 6px solid #FFFFFF;
-  line-height: 1.4;
-}
-
 div.right section ul {
   margin: 5px 20px;
 }
@@ -59,15 +54,6 @@ div.right section label {
 a {
   line-height: 1.3rem;
   border-bottom: 2px solid var(--color-black-800);
-}
-
-div.right section ul {
-  padding-left: 10px;
-  margin-bottom: 20px;
-
-  li {
-    font-weight: 580;
-  }
 }
 
 div.right section p {
@@ -135,8 +121,23 @@ div.right {
   div,
   span {
     color: var(--color-black-800);
+    font-size: 1.6rem;
   }
 }
+
+div.left {
+
+  h1,
+  h3,
+  ul,
+  li,
+  label,
+  div,
+  span {
+    font-size: 1.6rem;
+  }
+}
+
 
 div.right section label.h2-container {
   padding: 5px 20px;

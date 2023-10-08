@@ -12,9 +12,11 @@ import { ErrorGlobalHandler } from './errors/global';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResumeCreateComponent } from '@components/pages/resume/create.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ResumeTextStyleComponent } from '@components/pages/resume/text-style.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
-  declarations: [AppComponent, ResumeCreateComponent,],
+  declarations: [AppComponent, ResumeCreateComponent, ResumeTextStyleComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -25,6 +27,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     LazyLoadImageModule,
+    QuillModule.forRoot(),
   ],
 
   /**

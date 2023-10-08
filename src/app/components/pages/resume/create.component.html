@@ -1,4 +1,4 @@
-<div class="user-create-page" *ngIf="!on.preview">
+<div class="create-resume" *ngIf="!on.preview">
   <div class="main">
     <div class="container">
       <app-message></app-message>
@@ -16,13 +16,12 @@
               <ng-container *ngIf="i!==0">
               </ng-container>
               <ng-container *ngIf="i===0">
-                <!-- <label for="image">Image (URL):</label>
-            <input type="text" id="image" name="image"> -->
-
                 <label for="fullName">Full Name:</label>
                 <input type="text" name="fullName" [(ngModel)]="each.name">
+
                 <label for="profession">Profession:</label>
                 <input type="text" name="profession" [(ngModel)]="each.profession">
+
                 <label for="email">Email:</label>
                 <input type="text" name="email" [(ngModel)]="each.email">
 
@@ -31,12 +30,10 @@
 
                 <label for="address">Address:</label>
                 <input type="text" name="address" [(ngModel)]="each.address">
-
-                <label for="background">Background:</label>
-                <textarea name="background" rows="4" [(ngModel)]="each.background"></textarea>
               </ng-container>
             </ng-container>
           </ng-container>
+
           <ng-container *ngSwitchCase="2">
             <h1>Experiences</h1>
             <div class="list-experiences" *ngIf="getListable(list.experiences)">
@@ -49,8 +46,7 @@
                       <span *ngIf="!each.current"> - {{each.end}}</span>
                       <span *ngIf="each.current"> - Now</span>
                     </div>
-                    <div class="exp-desc">
-                      {{each.description}}
+                    <div class="exp-desc" [innerHTML]="each.description">
                     </div>
                   </div>
                 </ng-container>
@@ -69,8 +65,9 @@
                 </div>
 
                 <label for="degree">Responsibilities:</label>
-                <textarea type="text" name="description" [(ngModel)]="each.description"
-                  placeholder="Seprate by new line" rows="6"></textarea>
+                <div [innerHTML]="each.description" class="description text" (click)="onLoadStyleModel(i)"
+                  data-bs-toggle="modal" data-bs-target="#simpleModal">
+                </div>
 
                 <label for="employerAddress">Address:</label>
                 <input type="text" name="employerAddress" [(ngModel)]="each.address">
@@ -159,17 +156,16 @@
 
           <div *ngSwitchCase="4">
             <h1>Skills:</h1>
-            <div class="hbox skills">
-              <div class="list-skills">
-                <ng-container *ngFor="let each of list.skills">
-
-                  <div class="skill" (click)="onSkill(each)"><button class="button add"
+            <div class="skills">
+              <!-- <div class="list-skills"> -->
+              <ng-container *ngFor="let each of list.skills">
+                <div [innerHTML]="each" class="skill text" (click)="onLoadStyleModel(0)" data-bs-toggle="modal"
+                  data-bs-target="#simpleModal">
+                </div>
+                <!-- <div class="skill" (click)="onSkill(each)"><button class="button add"
                       *ngIf="!each.selected">ADD</button><button class="button added"
-                      *ngIf="each.selected">&#x2713;</button> {{each.name}}</div>
-                </ng-container>
-              </div>
-              <textarea name="skills" [(ngModel)]="on.skills" (ngModelChange)="onSkills()"
-                placeholder="Seprate by new line"></textarea>
+                      *ngIf="each.selected">&#x2713;</button> {{each.name}}</div> -->
+              </ng-container>
             </div>
           </div>
 
@@ -206,6 +202,7 @@
               <button class="button is-add" (click)="onAdd()">+ Add Another language</button>
             </div>
           </ng-container>
+
           <ng-container *ngSwitchCase="7">
             <h1 for="projects">References:</h1>
             <ng-container *ngFor="let each of list.references; let i = index;">
@@ -226,14 +223,44 @@
               <button class="button is-add" (click)="onAdd()">+ Add Another Reference</button>
             </div>
           </ng-container>
+          <ng-container *ngSwitchCase="8">
+            <h1>Background</h1>
+            <ng-container *ngFor="let each of list.backgrounds; let i=index;">
+              <ng-container *ngIf="i!==0">
+              </ng-container>
+              <ng-container *ngIf="i===0">
+                <label for="background">Background:</label>
+                <div [innerHTML]="each.background" class="background text" (click)="onLoadStyleModel(i)"
+                  data-bs-toggle="modal" data-bs-target="#simpleModal">
+                </div>
+                <div class="image-container" #imageContainer>
+                  <label for="background">Image:</label>
+                  <div class="upload-crop">
+                    <input type="file" #upload (change)="onSelectFile($event)">
+                    <button class="button is-secondary" (click)="onCropImage()" *ngIf="on.crop_image">Crop</button>
+                  </div>
+                  <div class="crop">
+                    <div class="origin" #origin [hidden]="!!each.image">
+                      <img crossorigin #image>
+                    </div>
+                    <img [src]="imageDestination" class="destination" #destination>
+                  </div>
+                  <div class="final-image" #finalImage>
+                    <img [src]="each.image" [hidden]="!each.image">
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
         </div>
+
         <div class="btns">
           <button class="button is-secondary is-back" [disabled]="on.stage===1" (click)="onStage('before')">
             <span>&larr;</span>
             Back</button>
-          <button class="button is-primary" [disabled]="on.stage===8" (click)="onStage('next')">Next</button>
+          <button class="button is-primary" [disabled]="on.stage===9" (click)="onStage('next')">Next</button>
         </div>
-        <button class="submit is-primary" [disabled]="on.stage!==8" (click)="onGenerate()">Generate Resume</button>
+        <button class="submit is-primary" [disabled]="on.stage!==9" (click)="onGenerate()">Generate Resume</button>
       </form>
     </div>
   </div>
@@ -269,3 +296,5 @@
     </div>
   </div>
 </div>
+
+<app-simple-modal></app-simple-modal>

@@ -1,4 +1,4 @@
-import { Component, ComponentFactory, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MessageService } from '@services/message.service';
 import { of } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
@@ -8,6 +8,12 @@ import samples from '@configs/samples';
 import { SampleBaseComponent } from '../../shared/samples/base.component';
 import objectHash from 'object-hash';
 import colors from '@configs/colors';
+import SimpleModalComponent from '@components/shared/modal/simple-modal.component';
+import { ResumeTextStyleComponent } from './text-style.component';
+import Cropper from 'cropperjs';
+
+declare var $;
+
 
 @Component({
   selector: 'app-resume-create',
@@ -15,23 +21,34 @@ import colors from '@configs/colors';
   styleUrls: ['./create.scss']
 })
 export class ResumeCreateComponent implements OnInit {
+  @ViewChild(SimpleModalComponent) tagModal: SimpleModalComponent;
   @ViewChild('samples', { read: ViewContainerRef }) samplesVc: ViewContainerRef;
+  @ViewChild('upload') uploadInput: ElementRef;
+  @ViewChild('origin') origin: ElementRef;
+  @ViewChild('destination') destination: ElementRef;
+  @ViewChild('finalImage') finalImage: ElementRef;
+  @ViewChild('image') image: ElementRef;
+
+
+  // @Input("src")
+
+  public imageDestination: string;
+  private cropper: Cropper;
 
   sample_resume_info = { "background": [{ "name": "Qandagha Safi", "profession": "Web Developer", "email": "1192safi@gmail.com", "phone": "+601123270509", "background": "As a team-oriented and skilled Computer Science graduate with\nover 4 years of progressive experience in software engineering and web development, I am eager to seek a challenging position in your esteemed organization. As an Afghan national who has studied and worked in Malaysia, I am available to start working immediately. ", "address": "B-16-02, Residence 1, Plaza @ Kelana Jaya Residence,  No.9 Jalan SS7/13B, 47301,  Petaling Jaya" }], "experience": [{ "title": "Web developer", "company": "MYCN Technology Management Sdn Bhd", "address": "Kuala Lumpur", "start": "2019-06-01", "end": "2023-08-31", "description": "I have been working on a large and complex project. My key responsibilities and achievements include:\nWriting reusable and clean programing code to develop 12/18 web and backend services.\nWorking on frontend and backend using Nodejs, Angular, Mongodb, Redis, Zookeeper", "current": false }, { "title": "Web developer", "company": "Tektician Sdn Bhd", "address": "Perak", "start": "2019-01-15", "end": "2019-06-01", "description": " My main responsibilities and achievements include:\nEnhancing customizing ERPnext components \nWriting clean frontend and backend code for features.", "current": false }], "education": [{ "university": "IIUM", "address": "Kuala Lumpur", "degree": "Bachelor's", "field": "Computer Science", "start": "2014-06-20", "end": "2019-01-01", "current": false }, { "university": "IIUM", "address": "Kuala Lumpur", "degree": "Master's", "field": "Information Technology ", "start": "2021-03-10", "end": "2023-08-01", "current": false }], "skill": "JavaScript\nNodeJS\nAngular\nHTML\nCSS\nRedis\nMongodb\nProblem-solving\nLeadership", "project": [{ "title": "Bursa Articles", "link": "http://bursa.tektician.com/" }, { "title": "Setia Awan", "link": "https://setiaawan.com/" }, { "title": "Office Admin", "link": "https://www.ugoffice.com/login" }, { "title": "Sports Informations", "link": "https://www.sportsinformations.com/login" }], "reference": [{ "name": "Jonathan Lee", "email": "jonathan@tektician.com" }, { "name": "Gan Chu Hang", "email": "hgun77@gmail.com" }], "language": [{ "name": "English" }, { "name": "Pashto" }, { "name": "Persian" }] }
   on = {
     api_key: null,
     api_secret: null,
-    stage: 1,
-    skills: null,
+    stage: 7,
     sample_id: 1,
     preview: 0,
     bg_color: 'bg-color-01',
     lb_color: 'lb-color-01',
+    crop_image: false
   }
 
   list = {
-    skills: [
-    ],
+    skills: [],
     backgrounds: [],
     experiences: [],
     educations: [],
@@ -40,12 +57,12 @@ export class ResumeCreateComponent implements OnInit {
     languages: [],
     bgColors: colors.bgColors,
     lbColors: colors.lbColors,
-    stages: [{ id: 1, completed: false }, { id: 2, completed: false }, { id: 3, completed: false }, { id: 4, completed: false }, { id: 5, completed: false }, { id: 6, completed: false }, { id: 7, completed: false }]
+    stages: [{ id: 1, completed: false }, { id: 2, completed: false }, { id: 3, completed: false }, { id: 4, completed: false }, { id: 5, completed: false }, { id: 6, completed: false }, { id: 7, completed: false }, { id: 8, completed: false }]
   }
 
   data = {
     credential: {},
-    background: { name: null, profession: null, email: null, phone: null, background: null, address: null, },
+    background: { name: null, profession: null, email: null, phone: null, background: null, address: null, image: null },
     experience: { edit: true, title: null, company: null, address: null, start: null, end: null, description: null, current: false },
     education: { edit: true, university: null, address: null, degree: null, field: null, start: null, end: null, current: false },
     project: { title: null, link: null },
@@ -59,12 +76,14 @@ export class ResumeCreateComponent implements OnInit {
     private zetyS: ZetyService,
     private resolver: ComponentFactoryResolver,
   ) {
+    this.imageDestination = '';
     const resume = localStorage.getItem('resume');
     if (resume) {
       for (let [key, value] of _.entries(JSON.parse(resume))) {
         switch (key) {
           case 'background':
-            this.list.stages[0].completed = !!value.find(v => objectHash(this.data.background) !== objectHash(v))
+            this.list.stages[0].completed = !!value.find(v => objectHash(_.omit(this.data.background, ['background', 'image'])) !== objectHash(_.omit(v, ['background', 'image'])))
+            this.list.stages[7].completed = !!value.find(v => objectHash(_.pick(this.data.background, ['background', 'image'])) !== objectHash(_.pick(v, ['background', 'image'])))
             value.map(v => this.list.backgrounds.push(v));
             break;
           case 'experience':
@@ -77,7 +96,7 @@ export class ResumeCreateComponent implements OnInit {
             break;
           case 'skill':
             this.list.stages[3].completed = !!value
-            this.on.skills = value;
+            this.list.skills = value;
             break;
           case 'project':
             this.list.stages[4].completed = !!value.find(v => objectHash(this.data.project) !== objectHash(v))
@@ -110,13 +129,79 @@ export class ResumeCreateComponent implements OnInit {
     console.log('this.list', this.list);
   }
 
+
+  cropImage(event) {
+    this.on.crop_image = true;
+    const file = event.target.files[0];
+    this.finalImage.nativeElement.style.display = 'none';
+    this.origin.nativeElement.style.display = 'inline-block';
+    this.destination.nativeElement.style.display = 'inline-block';
+    this.image.nativeElement.style.display = 'inline-block';
+
+    this.list.backgrounds[0].image = null;
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.image.nativeElement.src = e.target.result;
+        this.cropper = new Cropper(this.image.nativeElement, {
+          zoomable: false,
+          scalable: false,
+          aspectRatio: 1,
+
+          crop: () => {
+            const canvas = this.cropper.getCroppedCanvas({
+              width: 200,
+              height: 200
+            });
+            if (canvas) {
+              this.imageDestination = canvas.toDataURL("image/png")
+            }
+          }
+        })
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+
+  onSelectFile(event: any) {
+    const file = this.uploadInput.nativeElement.files[0];
+    this.on.crop_image = false;
+
+    if (file) {
+      const imageObject = new Image();
+      imageObject.src = URL.createObjectURL(file);
+
+      imageObject.onload = () => {
+        if (imageObject.width < 200 || imageObject.height < 200) {
+          this.message('error', 'the image is too small choose a bigger one');
+        } else if (imageObject.width > 200 || imageObject.height > 200) {
+          this.cropImage(event)
+        } else {
+          this.list.backgrounds[0].image = imageObject.src;
+          this.finalImage.nativeElement.style.display = 'inline-block';
+        }
+      };
+    }
+  }
+
+  onCropImage() {
+    this.list.backgrounds[0].image = this.destination.nativeElement.src;
+    this.finalImage.nativeElement.style.display = 'inline-block';
+    this.destination.nativeElement.style.display = 'none';
+    this.origin.nativeElement.style.display = 'none';
+    this.image.nativeElement.style.display = 'none';
+    this.on.crop_image = false;
+    this.cropper.destroy()
+  }
+
   onGenerate() {
     this.on.preview = 1;
     const data = {
       background: this.list.backgrounds,
       experience: this.list.experiences,
       education: this.list.educations,
-      skill: this.on.skills,
+      skill: this.list.skills,
       project: this.list.projects,
       reference: this.list.references,
       language: this.list.languages,
@@ -144,6 +229,42 @@ export class ResumeCreateComponent implements OnInit {
 
   }
 
+  onLoadStyleModel(index) {
+    let section = null;
+    switch (this.on.stage) {
+      case 8: section = 'background'; break;
+      case 2: section = 'experience'; break;
+      case 4: section = 'skill'; break;
+    }
+
+    this.tagModal.loadComponent({
+      component: ResumeTextStyleComponent,
+      fnsuccess: (data => {
+        this.onStyleAdded(data, index)
+      }),
+      fnclose: () => {
+        $('#simpleModal .close').click();
+      },
+      parameters: { section, index, info: this.list },
+      title: `Add text and style for ${section}`
+    });
+  }
+
+  onStyleAdded(data, index) {
+    console.log('onStyleAdded', data);
+    switch (this.on.stage) {
+      case 1:
+        this.list.backgrounds[index].background = data;
+        break;
+      case 2:
+        this.list.experiences[index].description = data;
+        break;
+      case 4:
+        this.list.skills[index] = data;
+        break;
+    }
+  }
+
   onStage(stage) {
     if (stage === 'next') {
       switch (this.on.stage) {
@@ -156,24 +277,22 @@ export class ResumeCreateComponent implements OnInit {
       }
     }
 
-    console.log('this.list.stages', this.on.stage, this.list.stages);
-
     switch (stage) {
       case 'before': this.on.stage > 1 ? this.on.stage -= 1 : 1; break;
       case 'next':
-        this.on.stage < 8 ? this.on.stage += 1 : 8;
+        this.on.stage < 9 ? this.on.stage += 1 : 9;
         this.list.stages.find(v => v.id === this.on.stage - 1).completed = true;
         break;
     }
 
-    if (this.on.stage === 2) {
-      this.fetchSkills().subscribe(res => {
-        this.list.skills = res.result.map(v => ({
-          name: v.text,
-          score: v.contentScore_DoNotUse
-        }))
-      })
-    }
+    // if (this.on.stage === 2) {
+    //   this.fetchSkills().subscribe(res => {
+    //     this.list.skills = res.result.map(v => ({
+    //       name: v.text,
+    //       score: v.contentScore_DoNotUse
+    //     }))
+    //   })
+    // }
   }
 
   onRemove() {
@@ -209,23 +328,23 @@ export class ResumeCreateComponent implements OnInit {
     }
   }
 
-  onSkills() {
-    this.list.skills = this.list.skills.map(v => ({ ...v, selected: `${this.on.skills}`.split('\n').find(f => v.name === f) }))
-  }
+  // onSkills() {
+  //   this.list.skills = this.list.skills.map(v => ({ ...v, selected: `${this.on.skills}`.split('\n').find(f => v.name === f) }))
+  // }
 
-  onSkill(skill) {
-    let skills = _.cloneDeep(this.on.skills);
-    skill.selected = !skill.selected;
-    switch (skill.selected) {
-      case false: skills = `${skills}`.split('\n').filter(v => v !== skill.name); break;
-      case true:
-        skills = `${skills}`.split('\n');
-        skills.push(skill.name)
-        skills = skills;
-        break;
-    }
-    this.on.skills = skills?.filter(v => v !== 'null')?.join('\n');
-  }
+  // onSkill(skill) {
+  //   let skills = _.cloneDeep(this.on.skills);
+  //   skill.selected = !skill.selected;
+  //   switch (skill.selected) {
+  //     case false: skills = `${skills}`.split('\n').filter(v => v !== skill.name); break;
+  //     case true:
+  //       skills = `${skills}`.split('\n');
+  //       skills.push(skill.name)
+  //       skills = skills;
+  //       break;
+  //   }
+  //   this.on.skills = skills?.filter(v => v !== 'null')?.join('\n');
+  // }
 
   onExpEdit(exp) {
     const dd = this.list.experiences.find(v => objectHash(_.omit(v, ['edit'])) === objectHash(_.omit(exp, ['edit'])))
@@ -270,21 +389,13 @@ export class ResumeCreateComponent implements OnInit {
     }
   }
 
-  message(type, message, title = null) {
-    this.messageS.updateEnvelop({ type, message, title, });
-    setTimeout(() => {
-      this.messageS.restart();
-    }, 3000);
-  }
-
   checkStageFilled() {
     let latest = null;
     switch (this.on.stage) {
-
       case 1:
         latest = this.list.backgrounds[this.list.backgrounds.length - 1];
         if (!latest) { return false }
-        if (!(latest.name && latest.profession && latest.phone && latest.background)) { return false }
+        if (!(latest.name && latest.profession && latest.phone)) { return false }
         return true;
 
       case 2:
@@ -300,7 +411,7 @@ export class ResumeCreateComponent implements OnInit {
         return true;
 
       case 4:
-        latest = this.on.skills;
+        latest = this.list.skills[this.list.skills.length - 1];
         if (!latest) { return false }
         return true;
 
@@ -320,6 +431,12 @@ export class ResumeCreateComponent implements OnInit {
         latest = this.list.references[this.list.references.length - 1];
         if (!latest) { return false }
         if (!(latest.name && latest.email)) { return false }
+        return true;
+
+      case 8:
+        latest = this.list.backgrounds[this.list.backgrounds.length - 1];
+        if (!latest) { return false }
+        if (!(latest.background)) { return false }
         return true;
     }
   }
@@ -355,9 +472,16 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   formatMergeItems(list) {
-    return list.filter(v => v).join(' ,')
+    return list.filter(v => v).join(', ')
   }
   getListable(array) {
     return !!array.filter(v => !v.edit).length;
+  }
+
+  message(type, message, title = null) {
+    this.messageS.updateEnvelop({ type, message, title, });
+    setTimeout(() => {
+      this.messageS.restart();
+    }, 3000);
   }
 }

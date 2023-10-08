@@ -28,7 +28,7 @@
       <section class="skills" *ngIf="data.skill.length">
         <h2 [ngClass]="lb_sample_color">Skills</h2>
         <ng-container *ngFor="let each of data.skill">
-          <label [ngClass]="lb_sample_color">{{each}}</label>
+          <div class="skills-container" [ngClass]="lb_sample_color" [innerHTML]="each"></div>
         </ng-container>
       </section>
 
@@ -70,11 +70,7 @@
             <span *ngIf="!each.current"> - {{each.end}}</span>
             <span *ngIf="each.current"> - Now</span>
           </div>
-          <ul>
-            <ng-container *ngFor="let line of each.description.split('\n')">
-              <li>{{line}}</li>
-            </ng-container>
-          </ul>
+          <div class="exp-description" [innerHTML]="each.description"></div>
         </ng-container>
       </section>
 
