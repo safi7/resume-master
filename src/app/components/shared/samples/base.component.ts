@@ -38,14 +38,10 @@ export default class SampleBaseComponent implements OnInit {
   receive(data) {
     console.log('receive', data);
     this.data = { ...this.data, ...data };
-    console.log('this.data', this.data);
-
   }
 
   downloadPdf() {
-
     const element = document.getElementById('sample'); // Get the HTML element to convert
-
     const opt = {
       margin: 0,
       filename: 'myPDF.pdf', // Specify the filename for the PDF
@@ -55,30 +51,11 @@ export default class SampleBaseComponent implements OnInit {
     };
 
     html2pdf().from(element).set(opt).save()
-
-    // outputPdf((pdf) => {
-    //   // You can save or display the PDF here
-    //   pdf.;
-    //   // To open the PDF in a new tab, use:
-    //   // window.open(pdf.output('bloburl'), '_blank');
-    // });
-
     return;
+  }
 
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    // Get the HTML element you want to convert to PDF
-    const elementToConvert = document.getElementById('sample'); // Replace 'elementId' with the ID of your HTML element
-
-    // Use html2canvas to capture the HTML element as an image
-    html2canvas(elementToConvert, { scale: 4 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-
-      // Add the captured image to the PDF
-      pdf.addImage(imgData, 'PNG', 0, 0, 210, 297)
-
-      // Save the PDF file (optional: you can also use 'dataurlnewwindow' to open it in a new window)
-      pdf.save('resume.pdf');
-    });
+  joinFields(fields, joiner) {
+    return fields.filter(v => !!v).join(joiner)
   }
 
 

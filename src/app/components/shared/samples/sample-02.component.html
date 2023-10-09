@@ -2,6 +2,11 @@
   <div class="left" [ngClass]="bg_sample_color">
     <div class="sections">
       <ng-container *ngFor="let each of data.background">
+        <section class="image">
+          <img *ngIf="each.image" [src]="each.image" alt="photo" width="150px" height="150px">
+        </section>
+
+
         <section class="personal-info" *ngIf="each.phone||each.email||each.address">
           <h2 [ngClass]="lb_sample_color">Personal Info</h2>
           <div class="personal">

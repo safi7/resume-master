@@ -16,11 +16,22 @@ import SampleBaseComponent from './base.component';
 })
 
 export class Sample01Component extends SampleBaseComponent implements OnInit {
-
   constructor() {
     super();
   }
+  ngOnInit() {
+  }
+}
 
+@Component({
+  selector: 'app-resume-sample-02',
+  templateUrl: './sample-02.component.html',
+  styleUrls: ['./sample-02.scss']
+})
+export class Sample02Component extends SampleBaseComponent implements OnInit {
+  constructor() {
+    super();
+  }
   ngOnInit() {
   }
 }

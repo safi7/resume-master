@@ -40,7 +40,7 @@ export class ResumeCreateComponent implements OnInit {
     api_key: null,
     api_secret: null,
     stage: 7,
-    sample_id: 1,
+    sample_id: 2,
     preview: 0,
     bg_color: 'bg-color-01',
     lb_color: 'lb-color-01',
@@ -122,10 +122,8 @@ export class ResumeCreateComponent implements OnInit {
     this.list.projects = this.list.projects.length ? this.list.projects : [{ ...this.data.project }]
     this.list.languages = this.list.languages.length ? this.list.languages : [{ ...this.data.language }]
     this.list.references = this.list.references.length ? this.list.references : [{ ...this.data.reference }]
+    this.list.skills = this.list.skills.length ? this.list.skills : ['<p>Write your skills here...</p>']
     this.checkEditable();
-    // setTimeout(() => {
-    //   this.onGenerate()
-    // }, 1000);
     console.log('this.list', this.list);
   }
 
@@ -138,7 +136,6 @@ export class ResumeCreateComponent implements OnInit {
     this.destination.nativeElement.style.display = 'inline-block';
     this.image.nativeElement.style.display = 'inline-block';
 
-    this.list.backgrounds[0].image = null;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
@@ -147,11 +144,10 @@ export class ResumeCreateComponent implements OnInit {
           zoomable: false,
           scalable: false,
           aspectRatio: 1,
-
           crop: () => {
             const canvas = this.cropper.getCroppedCanvas({
-              width: 200,
-              height: 200
+              width: 150,
+              height: 150
             });
             if (canvas) {
               this.imageDestination = canvas.toDataURL("image/png")
@@ -167,19 +163,28 @@ export class ResumeCreateComponent implements OnInit {
   onSelectFile(event: any) {
     const file = this.uploadInput.nativeElement.files[0];
     this.on.crop_image = false;
+    this.finalImage.nativeElement.src = '';
+    this.destination.nativeElement.src = '';
+    this.image.nativeElement.src = '';
+    this.imageDestination = '';
+    this.finalImage.nativeElement.style.display = 'none';
+    this.origin.nativeElement.style.display = 'none';
+    this.destination.nativeElement.style.display = 'none';
+    this.image.nativeElement.style.display = 'none';
+    this.cropper?.destroy()
 
     if (file) {
       const imageObject = new Image();
       imageObject.src = URL.createObjectURL(file);
-
       imageObject.onload = () => {
-        if (imageObject.width < 200 || imageObject.height < 200) {
+        if (imageObject.width < 150 || imageObject.height < 150) {
           this.message('error', 'the image is too small choose a bigger one');
-        } else if (imageObject.width > 200 || imageObject.height > 200) {
+        } else if (imageObject.width > 150 || imageObject.height > 150) {
           this.cropImage(event)
         } else {
           this.list.backgrounds[0].image = imageObject.src;
           this.finalImage.nativeElement.style.display = 'inline-block';
+          this.on.crop_image = false;
         }
       };
     }
@@ -191,6 +196,9 @@ export class ResumeCreateComponent implements OnInit {
     this.destination.nativeElement.style.display = 'none';
     this.origin.nativeElement.style.display = 'none';
     this.image.nativeElement.style.display = 'none';
+    this.destination.nativeElement.src = '';
+    this.image.nativeElement.src = '';
+    this.imageDestination = '';
     this.on.crop_image = false;
     this.cropper.destroy()
   }
@@ -266,6 +274,10 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   onStage(stage) {
+    if (this.on.crop_image) {
+      return this.message('error', 'Complete croping image first.')
+    }
+
     if (stage === 'next') {
       switch (this.on.stage) {
         case 1: if (!this.checkStageFilled()) { return window.alert('Please enter personal information.') }; break;
@@ -411,7 +423,7 @@ export class ResumeCreateComponent implements OnInit {
         return true;
 
       case 4:
-        latest = this.list.skills[this.list.skills.length - 1];
+        latest = this.list.skills[this.list.skills.length - 1]?.replace('<p>Write your skills here...</p>', '');
         if (!latest) { return false }
         return true;
 
@@ -474,6 +486,7 @@ export class ResumeCreateComponent implements OnInit {
   formatMergeItems(list) {
     return list.filter(v => v).join(', ')
   }
+
   getListable(array) {
     return !!array.filter(v => !v.edit).length;
   }

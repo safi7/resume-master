@@ -103,7 +103,7 @@ export class ResumeTextStyleComponent implements OnInit, IPopupableComponent {
         break;
       case 'skill':
         info = parameters.info.skills[parameters.index]
-        this.on.content = info ? info : '';
+        this.on.content = info ? info.replace('<p>Write your skills here...</p>', '') : '';
         break;
 
     }
@@ -111,26 +111,5 @@ export class ResumeTextStyleComponent implements OnInit, IPopupableComponent {
   onSuccess = (input = '') => { };
   onChildClose = () => { };
   onParentClose = () => { };
-
-  formatHtmlAttributes(content) {
-    content = sanitize(content, {
-      allowedTags: false,
-      allowedAttributes: {
-        a: ['src', 'href', 'name', 'target'],
-        img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
-        div: ['style'],
-      },
-      allowedSchemes: ['data', 'http', 'https'],
-      allowedIframeHostnames: [],
-    });
-
-    content = content.replace(/<p>(<br>)(\r\n|\n|\r)?<\/p>/igm, "");
-    content = content.replace(/<span>(<img[^\]]+>)<\/span>/ig, "$1");
-    content = content.replace(/<p>(<img[^>]+?>)(\r\n|\n|\r)?<\/p>/igm, "<div style:'width:100%; overflow-x:auto;'>$1</div>");
-    return { content };
-  }
-}
-function sanitize(content: any, arg1: { allowedTags: boolean; allowedAttributes: { a: string[]; img: string[]; div: string[]; }; allowedSchemes: string[]; allowedIframeHostnames: undefined[]; }): any {
-  throw new Error('Function not implemented.');
 }
 
