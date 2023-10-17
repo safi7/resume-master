@@ -1,0 +1,112 @@
+<div class="main" id="sample" *ngIf="!!show" #sample>
+  <div class="main-container">
+    <div class="sections">
+      <ng-container *ngFor="let each of data.background">
+        <section class="header">
+          <div class="main-header" [ngClass]="bg_sample_color">
+          </div>
+          <div class="sub-header">
+            <div class="empty-container">
+              <div class="empty" [ngClass]="bg_sample_color">
+              </div>
+            </div>
+            <img *ngIf="each.image" [src]="each.image" alt="photo" width="150px" height="150px">
+            <h1 [ngClass]="lb_sample_color">{{each.name}}</h1>
+          </div>
+        </section>
+
+        <section class="address" *ngIf="each.phone||each.email||each.address">
+          <div class="address">
+            <label [ngClass]="lb_sample_color" *ngIf="each.address">{{joinFields([each.address,each.phone,each.email],'
+              | ')}} </label>
+          </div>
+        </section>
+
+
+        <section class="summary" *ngIf="each.background">
+          <div class="h2-container">
+            <h2 [ngClass]="lb_sample_color">Summary</h2>
+          </div>
+          <h4 [ngClass]="lb_sample_color">{{each.profession}}</h4>
+          <p>{{each.background}}</p>
+        </section>
+      </ng-container>
+
+      <section *ngIf="data.experience.length" class="experience">
+        <div class="h2-container">
+          <h2 [ngClass]="lb_sample_color">Experiences</h2>
+        </div>
+        <ng-container *ngFor="let each of data.experience">
+          <h4 class="title">{{joinFields([each.title], ', ')}}</h4>
+          <div class="top">
+            <h4>{{joinFields([each.company, each.address], ' - ')}}</h4>
+            <div class="time">
+              <span>{{joinFields([each.start,!each.current? each.end: 'Now' ],' - ')}}</span>
+            </div>
+          </div>
+          <div class="exp-description" [innerHTML]="each.description"></div>
+        </ng-container>
+      </section>
+
+      <section class="education" *ngIf="data.education.length">
+        <div class="h2-container">
+          <h2 [ngClass]="lb_sample_color">Educations</h2>
+        </div>
+        <ng-container *ngFor=" let each of data.education">
+          <div class="top">
+            <h4 class="title">{{joinFields([each.degree], ' of ')}}</h4>
+            <div class="time">
+              <span>{{joinFields([each.start,!each.current? each.end: 'Now' ],' - ')}}</span>
+            </div>
+          </div>
+          <p>{{ joinFields([each.field,each.university],', ')}}
+          </p>
+        </ng-container>
+      </section>
+
+      <section class="projects" *ngIf="data.project.length">
+        <div class="h2-container">
+          <h2 [ngClass]="lb_sample_color">Projects</h2>
+        </div>
+        <ng-container *ngFor="let each of data.project">
+          <p *ngIf="each.link" class="link"><a href="each.link" target="each.link">{{each.title}}</a></p>
+          <p *ngIf="!each.link">{{each.title}}</p>
+        </ng-container>
+      </section>
+
+      <section class="skills" *ngIf="data.skill.length">
+        <div class="h2-container">
+          <h2 [ngClass]="lb_sample_color">Skills</h2>
+        </div>
+        <ng-container *ngFor="let each of data.skill">
+          <div class="skills-container" [innerHTML]="each"></div>
+        </ng-container>
+      </section>
+
+      <section class="langs" *ngIf="data.language.length">
+        <div class="h2-container">
+          <h2 [ngClass]="lb_sample_color">Languages</h2>
+        </div>
+        <div class="langs">
+          <ul>
+            <li *ngFor="let each of data.language">
+              {{each.name}}
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="references" *ngIf="data.reference.length">
+        <div class="h2-container">
+          <h2 [ngClass]="lb_sample_color">References</h2>
+        </div>
+        <ng-container *ngFor="let each of data.reference">
+          <div class="ref">
+            <p class="info">{{each.name}}</p>
+            <p class="info">{{each.email}}</p>
+          </div>
+        </ng-container>
+      </section>
+    </div>
+  </div>
+</div>

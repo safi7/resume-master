@@ -35,3 +35,17 @@ export class Sample02Component extends SampleBaseComponent implements OnInit {
   ngOnInit() {
   }
 }
+
+@Component({
+  selector: 'app-resume-sample-03',
+  templateUrl: './sample-03.component.html',
+  styleUrls: ['./sample-03.scss']
+})
+export class Sample03Component extends SampleBaseComponent implements OnInit {
+  constructor() {
+    super();
+  }
+  ngOnInit() {
+    this.margin = [0, 0, 45, 0];
+  }
+}

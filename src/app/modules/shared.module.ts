@@ -9,7 +9,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SampleBaseComponent } from '../components/shared/samples/base.component';
-import { Sample01Component, Sample02Component } from '@components/shared/samples/index.component';
+import {
+  Sample01Component,
+  Sample02Component,
+  Sample03Component
+} from '@components/shared/samples/index.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,8 @@ import { Sample01Component, Sample02Component } from '@components/shared/samples
     PopupContentDirective,
     SampleBaseComponent,
     Sample01Component,
-    Sample02Component
+    Sample02Component,
+    Sample03Component,
   ],
   imports: [
     CommonModule,
@@ -37,7 +42,8 @@ import { Sample01Component, Sample02Component } from '@components/shared/samples
     LazyLoadImageModule,
     SampleBaseComponent,
     Sample01Component,
-    Sample02Component
+    Sample02Component,
+    Sample03Component
   ],
   providers: [],
 })

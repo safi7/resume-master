@@ -27,6 +27,7 @@ export default class SampleBaseComponent implements OnInit {
     language: [],
     skill: []
   };
+  margin = [0, 0, 0, 0]
 
   constructor() {
   }
@@ -43,11 +44,11 @@ export default class SampleBaseComponent implements OnInit {
   downloadPdf() {
     const element = document.getElementById('sample'); // Get the HTML element to convert
     const opt = {
-      margin: 0,
+      margin: this.margin,
       filename: 'myPDF.pdf', // Specify the filename for the PDF
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      image: { type: 'jpeg', quality: 0.99 },
+      html2canvas: { scale: 10 },
+      jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },
     };
 
     html2pdf().from(element).set(opt).save()

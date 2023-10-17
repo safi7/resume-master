@@ -1,0 +1,51 @@
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul {
+  margin-left: 0px;
+  text-align: left;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  padding-left: 10px;
+}
+
+
+p {
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+ol {
+  margin-left: 0px;
+  text-align: left;
+  padding-left: 18px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+li {
+  margin-bottom: 5px;
+  padding-left: 10px;
+}
+
+.skills-container li:first-child {
+  margin-top: 10px;
+}
+
+.skills ul,
+.skills ol {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+p,
+label,
+a,
+li {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--color-block);
+}
