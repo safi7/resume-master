@@ -1,0 +1,189 @@
+@import './left-right.scss';
+
+
+
+div.left {
+  background-color: #FFFFFF;
+  width: 400px;
+
+  section h2 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: 'Lato', sans-serif;
+
+  }
+
+  section label.h2-cont {
+    width: 100%;
+    display: inline-block;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-left: -35px;
+    padding-left: 35px;
+  }
+}
+
+
+div.right {
+  section h2 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: 'Lato', sans-serif;
+    margin-left: -5px;
+  }
+
+  section label.h2-cont {
+    width: 100%;
+    display: inline-block;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 0px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+div.left section.image {
+  width: 100%;
+  text-align: center;
+  margin-left: 0px;
+  margin: 20px 0px;
+
+  h1 {
+    font-family: 'Lato', sans-serif;
+    font-size: 5rem;
+  }
+
+  .h2-cont {
+    width: 100%;
+    display: inline-block;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    margin-bottom: 0px;
+  }
+}
+
+div.left section.personal-info {
+  margin: 20px 0px;
+}
+
+img {
+  max-width: 150px;
+  max-height: 150px;
+  height: 150px;
+  width: 150px;
+  border-radius: 0px;
+  margin-left: -100px;
+  border: 10px solid var(--color-neutral-500);
+}
+
+div.left section.name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  label {
+    margin-top: 0px;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+}
+
+div.left section.personal-info {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+
+div.right section.experience,
+div.right section.education,
+div.right section.projects {
+  .exp-container {
+    border-left: 2px solid var(--color-neutral-500);
+    padding: 0px;
+    margin-top: -5px;
+    margin-left: 3px;
+  }
+
+  .edu-container {
+    border-left: 2px solid var(--color-neutral-500);
+    padding: 0px;
+    margin-left: 3px;
+    margin-top: -5px;
+  }
+
+  h3 {
+    padding: 0px 20px;
+    margin-top: -10px;
+    padding-top: 0px;
+    margin-top: 0px;
+  }
+
+  i.fa-circle {
+    color: var(--color-neutral-500);
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: -8px;
+  }
+
+  i.last {
+    margin-bottom: 15px;
+  }
+
+  .h2-cont {
+    margin-bottom: 20px;
+  }
+}
+
+div.left section.personal-info {
+  h3 {
+    margin-bottom: 5px;
+    margin-top: 15px;
+  }
+
+  p {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+}
+
+div.right section.projects {
+  p {
+    margin-left: 3px;
+    display: block;
+    padding-left: 0px;
+    padding-left: 22px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-left: 2px solid var(--color-neutral-500);
+  }
+
+  .pro-container {
+    margin-bottom: 10px;
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+}
+
+div.right section {
+  margin-top: 40px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+div.right section.summary {
+  p {
+    margin-left: 0px;
+  }
+
+  div {
+    margin-left: 0px;
+    padding-left: 5px;
+  }
+}

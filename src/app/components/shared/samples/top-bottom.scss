@@ -255,10 +255,12 @@ li {
   font-size: 1.8rem;
   font-weight: 500;
   color: var(--color-block);
+  text-align: justify;
 }
 
 h1 h2,
 h3,
 h4 {
   text-align: left;
+  text-align: justify;
 }

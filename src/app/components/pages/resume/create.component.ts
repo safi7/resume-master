@@ -40,7 +40,7 @@ export class ResumeCreateComponent implements OnInit {
     api_key: null,
     api_secret: null,
     stage: 9,
-    sample_id: 3,
+    sample_id: 6,
     preview: 0,
     bg_color: 'bg-color-01',
     lb_color: 'lb-color-01',
@@ -78,6 +78,8 @@ export class ResumeCreateComponent implements OnInit {
   ) {
     this.imageDestination = '';
     const resume = localStorage.getItem('resume');
+    this.on.sample_id = localStorage.getItem('template_id') ? +localStorage.getItem('template_id') : this.on.sample_id;
+    localStorage.setItem('template_id', `${this.on.sample_id}`)
     if (resume) {
       for (let [key, value] of _.entries(JSON.parse(resume))) {
         switch (key) {
@@ -125,6 +127,7 @@ export class ResumeCreateComponent implements OnInit {
     this.list.skills = this.list.skills.length ? this.list.skills : ['<p>Write your skills here...</p>']
     this.checkEditable();
     console.log('this.list', this.list);
+    console.log('this.on', this.on);
   }
 
 
@@ -158,7 +161,6 @@ export class ResumeCreateComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-
 
   onSelectFile(event: any) {
     const file = this.uploadInput.nativeElement.files[0];
@@ -239,6 +241,7 @@ export class ResumeCreateComponent implements OnInit {
 
   onLoadStyleModel(index) {
     let section = null;
+    console.log('this.on.stage', this.on.stage)
     switch (this.on.stage) {
       case 8: section = 'background'; break;
       case 2: section = 'experience'; break;
@@ -259,9 +262,8 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   onStyleAdded(data, index) {
-    console.log('onStyleAdded', data);
     switch (this.on.stage) {
-      case 1:
+      case 8:
         this.list.backgrounds[index].background = data;
         break;
       case 2:
@@ -269,6 +271,9 @@ export class ResumeCreateComponent implements OnInit {
         break;
       case 4:
         this.list.skills[index] = data;
+        break;
+      default:
+        console.log('onStyleAdded', data, this.on);
         break;
     }
   }

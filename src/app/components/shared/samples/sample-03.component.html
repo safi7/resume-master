@@ -1,4 +1,4 @@
-<div class="main" id="sample" *ngIf="!!show" #sample>
+<div class="main top-bottom" id="sample" *ngIf="!!show" #sample>
   <div class="main-container">
     <div class="sections">
       <ng-container *ngFor="let each of data.background">
@@ -28,7 +28,7 @@
             <h2 [ngClass]="lb_sample_color">Summary</h2>
           </div>
           <h4 [ngClass]="lb_sample_color">{{each.profession}}</h4>
-          <p>{{each.background}}</p>
+          <div [innerHTML]="each.background"></div>
         </section>
       </ng-container>
 

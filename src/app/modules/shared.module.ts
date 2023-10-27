@@ -12,7 +12,13 @@ import { SampleBaseComponent } from '../components/shared/samples/base.component
 import {
   Sample01Component,
   Sample02Component,
-  Sample03Component
+  Sample03Component,
+  Sample04Component,
+  Sample05Component,
+  Sample06Component,
+  Sample07Component,
+  Sample08Component,
+
 } from '@components/shared/samples/index.component';
 
 @NgModule({
@@ -24,6 +30,11 @@ import {
     Sample01Component,
     Sample02Component,
     Sample03Component,
+    Sample04Component,
+    Sample05Component,
+    Sample06Component,
+    Sample07Component,
+    Sample08Component,
   ],
   imports: [
     CommonModule,
@@ -43,7 +54,12 @@ import {
     SampleBaseComponent,
     Sample01Component,
     Sample02Component,
-    Sample03Component
+    Sample03Component,
+    Sample04Component,
+    Sample05Component,
+    Sample06Component,
+    Sample07Component,
+    Sample08Component,
   ],
   providers: [],
 })

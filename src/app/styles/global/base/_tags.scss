@@ -35,8 +35,8 @@ li {
   margin-top: 10px;
 }
 
-.skills ul,
-.skills ol {
+.top-bottom .skills ul,
+.top-bottom .skills ol {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -48,4 +48,5 @@ li {
   font-size: 1.8rem;
   font-weight: 500;
   color: var(--color-block);
+  text-align: justify;
 }
