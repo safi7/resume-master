@@ -40,7 +40,7 @@ export class ResumeCreateComponent implements OnInit {
     api_key: null,
     api_secret: null,
     stage: 9,
-    sample_id: 6,
+    sample_id: 1,
     preview: 0,
     bg_color: 'bg-color-01',
     lb_color: 'lb-color-01',

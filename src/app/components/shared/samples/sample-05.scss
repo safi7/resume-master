@@ -63,3 +63,43 @@ div.right section.experience {
     border-top-left-radius: 10px;
   }
 }
+
+div.left section.personal-info {
+  margin-top: 0px;
+  padding-top: 0px;
+
+  div.personal {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+}
+
+div.right section.references {
+  div.box {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+  }
+
+  p {
+    width: 50%;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+
+div.left section.langs {
+  p {
+    margin-top: 7px;
+  }
+}
+
+
+div.right section.summary {
+  margin-top: 30px;
+}

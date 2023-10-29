@@ -38,13 +38,13 @@ section.name {
 
 div.right h2 {
   border-bottom: 2px solid var(--color-neutral-500);
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   font-family: 'Lato', sans-serif;
 }
 
 div.left h2 {
   border-bottom: 2px solid var(--color-neutral-300);
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   font-family: 'Lato', sans-serif;
 }
 
@@ -60,24 +60,21 @@ div.right section.experience {
     padding: 0px;
     margin-left: 22px;
     margin-top: -4px;
-    margin-bottom: -6px;
+    margin-bottom: -10px;
   }
 
   h3 {
     padding: 0px 20px;
-    margin-top: -9px;
+    margin-top: -10px;
   }
 
   i {
     color: var(--color-neutral-500);
     margin-left: 19px;
     font-size: 0.8rem;
+    display: inline-block;
   }
 
-  .fa-circle:first-of-type {
-    margin-top: 15px;
-    margin-left: -1px;
-  }
 }
 
 div.left section.personal-info {
@@ -90,4 +87,32 @@ div.left section.personal-info {
     margin-top: 0px;
     padding-top: 0px;
   }
+}
+
+div.right section.references {
+  div.box {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+  }
+
+  p {
+    width: 50%;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+
+div.left section.langs {
+  p {
+    margin-top: 7px;
+  }
+}
+
+
+div.right section.summary {
+  margin-top: 30px;
 }
