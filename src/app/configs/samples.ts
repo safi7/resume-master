@@ -9,6 +9,8 @@ import {
   Sample06Component,
   Sample07Component,
   Sample08Component,
+  Sample09Component,
+  Sample10Component,
 } from '@components/shared/samples/index.component'
 
 export default {
@@ -20,4 +22,6 @@ export default {
   6: Sample06Component,
   7: Sample07Component,
   8: Sample08Component,
+  9: Sample09Component,
+  10: Sample10Component
 }

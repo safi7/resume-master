@@ -59,13 +59,13 @@ div.right section.experience {
     border-left: 2px solid var(--color-neutral-500);
     padding: 0px;
     margin-left: 22px;
-    margin-top: -4px;
+    margin-top: 0px;
     margin-bottom: -10px;
   }
 
   h3 {
     padding: 0px 20px;
-    margin-top: -10px;
+    margin-top: -9px;
   }
 
   i {
@@ -115,4 +115,8 @@ div.left section.langs {
 
 div.right section.summary {
   margin-top: 30px;
+}
+
+h2 {
+  margin-bottom: 10px;
 }

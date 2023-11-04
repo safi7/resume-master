@@ -18,6 +18,8 @@ import {
   Sample06Component,
   Sample07Component,
   Sample08Component,
+  Sample09Component,
+  Sample10Component,
 
 } from '@components/shared/samples/index.component';
 
@@ -35,6 +37,8 @@ import {
     Sample06Component,
     Sample07Component,
     Sample08Component,
+    Sample09Component,
+    Sample10Component,
   ],
   imports: [
     CommonModule,
@@ -60,6 +64,8 @@ import {
     Sample06Component,
     Sample07Component,
     Sample08Component,
+    Sample09Component,
+    Sample10Component,
   ],
   providers: [],
 })

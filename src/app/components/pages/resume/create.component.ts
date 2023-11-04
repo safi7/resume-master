@@ -11,6 +11,7 @@ import colors from '@configs/colors';
 import SimpleModalComponent from '@components/shared/modal/simple-modal.component';
 import { ResumeTextStyleComponent } from './text-style.component';
 import Cropper from 'cropperjs';
+import templateSettings from '@configs/settings';
 
 declare var $;
 
@@ -44,7 +45,8 @@ export class ResumeCreateComponent implements OnInit {
     preview: 0,
     bg_color: 'bg-color-01',
     lb_color: 'lb-color-01',
-    crop_image: false
+    crop_image: false,
+    maxStages: 0,
   }
 
   list = {
@@ -57,7 +59,8 @@ export class ResumeCreateComponent implements OnInit {
     languages: [],
     bgColors: colors.bgColors,
     lbColors: colors.lbColors,
-    stages: [{ id: 1, completed: false }, { id: 2, completed: false }, { id: 3, completed: false }, { id: 4, completed: false }, { id: 5, completed: false }, { id: 6, completed: false }, { id: 7, completed: false }, { id: 8, completed: false }]
+    stages: [{ id: 1, completed: false }, { id: 2, completed: false }, { id: 3, completed: false }, { id: 4, completed: false }, { id: 5, completed: false }, { id: 6, completed: false }, { id: 7, completed: false }, { id: 8, completed: false }, { id: 10, completed: false }, { id: 11, completed: false }],
+    settings: []
   }
 
   data = {
@@ -79,7 +82,12 @@ export class ResumeCreateComponent implements OnInit {
     this.imageDestination = '';
     const resume = localStorage.getItem('resume');
     this.on.sample_id = localStorage.getItem('template_id') ? +localStorage.getItem('template_id') : this.on.sample_id;
-    localStorage.setItem('template_id', `${this.on.sample_id}`)
+    localStorage.setItem('template_id', `${this.on.sample_id}`);
+    this.list.settings = templateSettings[+this.on.sample_id] ?? templateSettings[0];
+    this.on.maxStages = this.list.settings[this.list.settings.length - 1];
+    this.on.stage = this.list.settings[this.list.settings.length - 1];
+    this.list.stages = this.list.stages.filter(v => this.list.settings.includes(v.id))
+
     if (resume) {
       for (let [key, value] of _.entries(JSON.parse(resume))) {
         switch (key) {
@@ -241,7 +249,6 @@ export class ResumeCreateComponent implements OnInit {
 
   onLoadStyleModel(index) {
     let section = null;
-    console.log('this.on.stage', this.on.stage)
     switch (this.on.stage) {
       case 8: section = 'background'; break;
       case 2: section = 'experience'; break;
@@ -283,6 +290,9 @@ export class ResumeCreateComponent implements OnInit {
       return this.message('error', 'Complete croping image first.')
     }
 
+    const max = this.list.settings[this.list.settings.length - 1];
+    console.log({ max });
+
     if (stage === 'next') {
       switch (this.on.stage) {
         case 1: if (!this.checkStageFilled()) { return window.alert('Please enter personal information.') }; break;
@@ -295,12 +305,18 @@ export class ResumeCreateComponent implements OnInit {
     }
 
     switch (stage) {
-      case 'before': this.on.stage > 1 ? this.on.stage -= 1 : 1; break;
+      case 'before':
+        const index1 = this.list.settings.indexOf(this.on.stage);
+        this.on.stage = this.list.settings[index1 - 1];
+        break;
       case 'next':
-        this.on.stage < 9 ? this.on.stage += 1 : 9;
-        this.list.stages.find(v => v.id === this.on.stage - 1).completed = true;
+        this.list.stages.find(v => v.id === this.on.stage).completed = true;
+        const index2 = this.list.settings.indexOf(this.on.stage);
+        this.on.stage = this.list.settings[index2 + 1] ?? this.on.maxStages;
         break;
     }
+
+    console.log(this.on)
 
     // if (this.on.stage === 2) {
     //   this.fetchSkills().subscribe(res => {
@@ -410,6 +426,7 @@ export class ResumeCreateComponent implements OnInit {
     let latest = null;
     switch (this.on.stage) {
       case 1:
+      case 11:
         latest = this.list.backgrounds[this.list.backgrounds.length - 1];
         if (!latest) { return false }
         if (!(latest.name && latest.profession && latest.phone)) { return false }
@@ -454,6 +471,12 @@ export class ResumeCreateComponent implements OnInit {
         latest = this.list.backgrounds[this.list.backgrounds.length - 1];
         if (!latest) { return false }
         if (!(latest.background)) { return false }
+        return true;
+
+      case 10:
+        latest = this.list.projects[this.list.projects.length - 1];
+        if (!latest) { return false }
+        if (!(latest.title)) { return false }
         return true;
     }
   }

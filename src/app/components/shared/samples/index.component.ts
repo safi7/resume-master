@@ -115,3 +115,41 @@ export class Sample08Component extends SampleBaseComponent implements OnInit {
   ngOnInit() {
   }
 }
+
+@Component({
+  selector: 'app-resume-sample-09',
+  templateUrl: './sample-09.component.html',
+  styleUrls: ['./sample-09.scss']
+})
+export class Sample09Component extends SampleBaseComponent implements OnInit {
+  constructor() {
+    super();
+  }
+  ngOnInit() {
+  }
+
+  formatDp(name, i = 1) {
+    if (i === 1) {
+      if (!name) { return 'N' }
+      return name[0]
+    } else {
+      if (!name) { return 'A' }
+      const [first, last] = name.split(' ');
+      if (!last) { return first[1] }
+      return `${last[0]}`;
+    }
+  }
+}
+
+@Component({
+  selector: 'app-resume-sample-10',
+  templateUrl: './sample-10.component.html',
+  styleUrls: ['./sample-10.scss']
+})
+export class Sample10Component extends SampleBaseComponent implements OnInit {
+  constructor() {
+    super();
+  }
+  ngOnInit() {
+  }
+}

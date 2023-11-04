@@ -188,6 +188,25 @@
             </div>
           </ng-container>
 
+          <ng-container *ngSwitchCase="10">
+            <h1 for="projects">Projects:</h1>
+            <ng-container *ngFor="let each of list.projects; let i = index;">
+              <div class="hbox">
+                <label for="projectTitle{{i}}">Project Description:</label>
+              </div>
+              <div class="hbox">
+                <textarea type="text" name="projectTitle{{i}}" [(ngModel)]="each.title"></textarea>
+              </div>
+            </ng-container>
+            <div class="dhbox">
+              <button class="button is-remove" (click)="onRemove()" *ngIf="list.projects.length > 1">- Remove
+                Project</button>
+              <button class="button is-add" (click)="onAdd()">+ Add Another Project</button>
+            </div>
+          </ng-container>
+
+
+
           <ng-container *ngSwitchCase="6">
             <h1 for="projects">languages:</h1>
             <ng-container *ngFor="let each of list.languages; let i = index;">
@@ -258,9 +277,10 @@
           <button class="button is-secondary is-back" [disabled]="on.stage===1" (click)="onStage('before')">
             <span>&larr;</span>
             Back</button>
-          <button class="button is-primary" [disabled]="on.stage===9" (click)="onStage('next')">Next</button>
+          <button class="button is-primary" [disabled]="on.stage===on.maxStages" (click)="onStage('next')">Next</button>
         </div>
-        <button class="submit is-primary" [disabled]="on.stage!==9" (click)="onGenerate()">Generate Resume</button>
+        <button class="submit is-primary" [disabled]="on.stage!==on.maxStages" (click)="onGenerate()">Generate
+          Resume</button>
       </form>
     </div>
   </div>

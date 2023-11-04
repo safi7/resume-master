@@ -57,7 +57,15 @@ div.left section.personal-info {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 0px;
+  }
+
+  P {
+    margin: 10px 10px 0px 0px;
+  }
+
+  p:first-child {
+    margin-top: 0px;
   }
 }
 
@@ -87,4 +95,8 @@ div.left section.langs {
 
 div.right section.summary {
   margin-top: 30px;
+}
+
+h2 {
+  margin-bottom: 10px;
 }
