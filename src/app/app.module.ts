@@ -14,9 +14,10 @@ import { ResumeCreateComponent } from '@components/pages/resume/create.component
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ResumeTextStyleComponent } from '@components/pages/resume/text-style.component';
 import { QuillModule } from 'ngx-quill';
+import { ResumeListComponent } from '@components/pages/resume/list.component';
 
 @NgModule({
-  declarations: [AppComponent, ResumeCreateComponent, ResumeTextStyleComponent],
+  declarations: [AppComponent, ResumeCreateComponent, ResumeTextStyleComponent, ResumeListComponent],
   imports: [
     CommonModule,
     HttpClientModule,

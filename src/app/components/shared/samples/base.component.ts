@@ -15,6 +15,7 @@ import * as html2pdf from 'html2pdf.js';
 })
 export default class SampleBaseComponent implements OnInit {
 
+  sample_id = null;
   show = 0;
   bg_sample_color = 'bg-color-01';
   lb_sample_color = 'lb-color-01';
@@ -45,7 +46,7 @@ export default class SampleBaseComponent implements OnInit {
     const element = document.getElementById('sample'); // Get the HTML element to convert
     const opt = {
       margin: this.margin,
-      filename: 'myPDF.pdf', // Specify the filename for the PDF
+      filename: `resume-${this.sample_id}`, // Specify the filename for the PDF
       image: { type: 'jpeg', quality: 0.99 },
       html2canvas: { scale: 10 },
       jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },

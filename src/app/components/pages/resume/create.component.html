@@ -34,6 +34,28 @@
             </ng-container>
           </ng-container>
 
+          <ng-container *ngSwitchCase="11">
+            <h1>Personal Information</h1>
+            <ng-container *ngFor="let each of list.backgrounds; let i=index;">
+              <ng-container *ngIf="i!==0">
+              </ng-container>
+              <ng-container *ngIf="i===0">
+                <label for="fullName">Full Name:</label>
+                <input type="text" name="fullName" [(ngModel)]="each.name">
+
+                <label for="profession">Profession:</label>
+                <input type="text" name="profession" [(ngModel)]="each.profession">
+
+                <label for="email">Email:</label>
+                <input type="text" name="email" [(ngModel)]="each.email">
+
+                <label for="phone">Phone Number:</label>
+                <input type="text" name="phone" [(ngModel)]="each.phone">
+
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
           <ng-container *ngSwitchCase="2">
             <h1>Experiences</h1>
             <div class="list-experiences" *ngIf="getListable(list.experiences)">

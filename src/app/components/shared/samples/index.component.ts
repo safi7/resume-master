@@ -18,6 +18,7 @@ import SampleBaseComponent from './base.component';
 export class Sample01Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 1;
   }
   ngOnInit() {
   }
@@ -31,6 +32,7 @@ export class Sample01Component extends SampleBaseComponent implements OnInit {
 export class Sample02Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 2;
   }
   ngOnInit() {
   }
@@ -44,6 +46,7 @@ export class Sample02Component extends SampleBaseComponent implements OnInit {
 export class Sample03Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 3;
   }
   ngOnInit() {
     this.margin = [0, 0, 45, 0];
@@ -58,6 +61,7 @@ export class Sample03Component extends SampleBaseComponent implements OnInit {
 export class Sample04Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 4;
   }
   ngOnInit() {
   }
@@ -71,6 +75,7 @@ export class Sample04Component extends SampleBaseComponent implements OnInit {
 export class Sample05Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 5;
   }
   ngOnInit() {
   }
@@ -84,6 +89,7 @@ export class Sample05Component extends SampleBaseComponent implements OnInit {
 export class Sample06Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 6;
   }
   ngOnInit() {
   }
@@ -98,6 +104,7 @@ export class Sample06Component extends SampleBaseComponent implements OnInit {
 export class Sample07Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 7;
   }
   ngOnInit() {
   }
@@ -111,7 +118,9 @@ export class Sample07Component extends SampleBaseComponent implements OnInit {
 export class Sample08Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 8;
   }
+
   ngOnInit() {
   }
 }
@@ -124,6 +133,7 @@ export class Sample08Component extends SampleBaseComponent implements OnInit {
 export class Sample09Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 9;
   }
   ngOnInit() {
   }
@@ -149,6 +159,7 @@ export class Sample09Component extends SampleBaseComponent implements OnInit {
 export class Sample10Component extends SampleBaseComponent implements OnInit {
   constructor() {
     super();
+    this.sample_id = 10;
   }
   ngOnInit() {
   }

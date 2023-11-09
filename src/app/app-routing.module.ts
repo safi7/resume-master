@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ResumeCreateComponent } from '@components/pages/resume/create.component';
+import { ResumeListComponent } from '@components/pages/resume/list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/resume/create', pathMatch: 'full' },
+  { path: '', redirectTo: '/resume', pathMatch: 'full' },
   {
-    path: 'resume/create',
+    path: 'resume',
     children: [
-      { path: '', component: ResumeCreateComponent, pathMatch: 'full' },
+      { path: '', component: ResumeListComponent, pathMatch: 'full' },
+      { path: ':id/create', component: ResumeCreateComponent, pathMatch: 'full' },
     ]
   }
   // { path: '**', redirectTo: '' }

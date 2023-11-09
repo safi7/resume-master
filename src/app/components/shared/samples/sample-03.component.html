@@ -79,7 +79,7 @@
           <h2 [ngClass]="lb_sample_color">Skills</h2>
         </div>
         <ng-container *ngFor="let each of data.skill">
-          <div class="skills-container" [innerHTML]="each"></div>
+          <div class="skills-container top-bottom" [innerHTML]="each"></div>
         </ng-container>
       </section>
 
@@ -87,7 +87,7 @@
         <div class="h2-container">
           <h2 [ngClass]="lb_sample_color">Languages</h2>
         </div>
-        <div class="langs">
+        <div class="langs top-bottom">
           <ul>
             <li *ngFor="let each of data.language">
               {{each.name}}

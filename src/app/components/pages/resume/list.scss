@@ -1,0 +1,158 @@
+.sample-container {
+    width: 100%;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    gap: 20px;
+    background-color: var(--color-primary-100);
+
+}
+
+header {
+    border-bottom: 2px solid var(--color-primary-400);
+    width: 100%;
+    text-align: center;
+    background-color: var(--color-primary-300);
+}
+
+.page-header {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 15px;
+}
+
+.page-sub-header {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    /* Larger font size for the main heading */
+    margin: 0;
+    color: var(--color-primary);
+    width: 600px;
+    text-align: center;
+}
+
+.page-sub-header h2 {
+    width: 600px;
+    text-align: right;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, var(--color-primary-800), var(--color-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.image-preview {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    height: 80vh;
+    min-height: 700px;
+    flex-direction: row;
+    /* Adjust the desired height */
+}
+
+.active,
+.left,
+.right {
+    flex: 1;
+    filter: blur(5px);
+    /* Apply a blur effect to the left and right images */
+    transition: filter 0.3s ease;
+}
+
+.left {
+    overflow: hidden;
+}
+
+.right {
+    overflow: hidden;
+}
+
+.active {
+    width: 680px;
+    filter: none;
+    height: 80vh;
+    transition: filter 0.3s ease;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #fff;
+    text-align: center;
+    overflow: hidden;
+}
+
+img {
+    width: 600px;
+    height: 100%;
+    border-left: 1px solid var(--color-primary-100);
+    border-right: 1px solid var(--color-primary-100);
+}
+
+.active img {
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 600px;
+    gap: 20px;
+}
+
+button {
+    width: 130px;
+    font-size: 1.6rem;
+}
+
+.image-preview i {
+    position: absolute;
+    top: 50%;
+    font-size: 5rem;
+    cursor: pointer;
+    color: var(--color-primary);
+    padding: 5px;
+
+    &.fa-chevron-left {
+        left: 5px;
+        /* Add some left margin to create space */
+        transform: scale(0.9);
+        /* Zoom out the icon slightly */
+    }
+
+    &.fa-chevron-right {
+        right: 5px;
+        /* Add some right margin to create space */
+        transform: scale(0.9);
+        /* Zoom out the icon slightly */
+    }
+}

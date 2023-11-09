@@ -12,6 +12,7 @@ import SimpleModalComponent from '@components/shared/modal/simple-modal.componen
 import { ResumeTextStyleComponent } from './text-style.component';
 import Cropper from 'cropperjs';
 import templateSettings from '@configs/settings';
+import { ActivatedRoute } from '@angular/router';
 
 declare var $;
 
@@ -40,7 +41,7 @@ export class ResumeCreateComponent implements OnInit {
   on = {
     api_key: null,
     api_secret: null,
-    stage: 9,
+    stage: 1,
     sample_id: 1,
     preview: 0,
     bg_color: 'bg-color-01',
@@ -59,7 +60,7 @@ export class ResumeCreateComponent implements OnInit {
     languages: [],
     bgColors: colors.bgColors,
     lbColors: colors.lbColors,
-    stages: [{ id: 1, completed: false }, { id: 2, completed: false }, { id: 3, completed: false }, { id: 4, completed: false }, { id: 5, completed: false }, { id: 6, completed: false }, { id: 7, completed: false }, { id: 8, completed: false }, { id: 10, completed: false }, { id: 11, completed: false }],
+    stages: [{ id: 1, completed: false }, { id: 11, completed: false }, { id: 2, completed: false }, { id: 3, completed: false }, { id: 4, completed: false }, { id: 5, completed: false }, { id: 10, completed: false }, { id: 6, completed: false }, { id: 7, completed: false }, { id: 8, completed: false }],
     settings: []
   }
 
@@ -78,46 +79,48 @@ export class ResumeCreateComponent implements OnInit {
     private messageS: MessageService,
     private zetyS: ZetyService,
     private resolver: ComponentFactoryResolver,
+    private route: ActivatedRoute
   ) {
     this.imageDestination = '';
     const resume = localStorage.getItem('resume');
-    this.on.sample_id = localStorage.getItem('template_id') ? +localStorage.getItem('template_id') : this.on.sample_id;
-    localStorage.setItem('template_id', `${this.on.sample_id}`);
+    this.route.paramMap.subscribe(params => {
+      this.on.sample_id = +params.get('id');
+    })
     this.list.settings = templateSettings[+this.on.sample_id] ?? templateSettings[0];
     this.on.maxStages = this.list.settings[this.list.settings.length - 1];
-    this.on.stage = this.list.settings[this.list.settings.length - 1];
+    this.on.stage = this.list.settings[0];
     this.list.stages = this.list.stages.filter(v => this.list.settings.includes(v.id))
-
     if (resume) {
       for (let [key, value] of _.entries(JSON.parse(resume))) {
         switch (key) {
           case 'background':
-            this.list.stages[0].completed = !!value.find(v => objectHash(_.omit(this.data.background, ['background', 'image'])) !== objectHash(_.omit(v, ['background', 'image'])))
-            this.list.stages[7].completed = !!value.find(v => objectHash(_.pick(this.data.background, ['background', 'image'])) !== objectHash(_.pick(v, ['background', 'image'])))
+            this.list.stages.find(v => v.id === 1 || v.id === 11).completed = !!value.find(v => objectHash(_.omit(this.data.background, ['background', 'image'])) !== objectHash(_.omit(v, ['background', 'image'])))
+
+            this.list.stages.find(v => v.id === 8).completed = !!value.find(v => objectHash(_.pick(this.data.background, ['background', 'image'])) !== objectHash(_.pick(v, ['background', 'image'])))
             value.map(v => this.list.backgrounds.push(v));
             break;
           case 'experience':
-            this.list.stages[1].completed = !!value.find(v => objectHash(this.data.experience) !== objectHash(v))
+            this.list.stages.find(v => v.id === 2).completed = !!value.find(v => objectHash(this.data.experience) !== objectHash(v))
             value.map(v => this.list.experiences.push(v));
             break;
           case 'education':
-            this.list.stages[2].completed = !!value.find(v => objectHash(this.data.education) !== objectHash(v))
+            this.list.stages.find(v => v.id === 3).completed = !!value.find(v => objectHash(this.data.education) !== objectHash(v))
             value.map(v => this.list.educations.push(v));
             break;
           case 'skill':
-            this.list.stages[3].completed = !!value
+            this.list.stages.find(v => v.id === 4).completed = !!value
             this.list.skills = value;
             break;
           case 'project':
-            this.list.stages[4].completed = !!value.find(v => objectHash(this.data.project) !== objectHash(v))
+            this.list.stages.find(v => v.id === 5 || v.id === 10) ? this.list.stages.find(v => v.id === 5 || v.id === 10).completed = !!value.find(v => objectHash(this.data.project) !== objectHash(v)) : false;
             value.map(v => this.list.projects.push(v));
             break;
           case 'language':
-            this.list.stages[5].completed = !!value.find(v => objectHash(this.data.language) !== objectHash(v))
+            this.list.stages.find(v => v.id === 6).completed = !!value.find(v => objectHash(this.data.language) !== objectHash(v))
             value.map(v => this.list.languages.push(v));
             break;
           case 'reference':
-            this.list.stages[6].completed = !!value.find(v => objectHash(this.data.reference) !== objectHash(v))
+            this.list.stages.find(v => v.id === 7) ? this.list.stages.find(v => v.id === 7).completed = !!value.find(v => objectHash(this.data.reference) !== objectHash(v)) : false;
             value.map(v => this.list.references.push(v));
             break;
         }
@@ -134,10 +137,7 @@ export class ResumeCreateComponent implements OnInit {
     this.list.references = this.list.references.length ? this.list.references : [{ ...this.data.reference }]
     this.list.skills = this.list.skills.length ? this.list.skills : ['<p>Write your skills here...</p>']
     this.checkEditable();
-    console.log('this.list', this.list);
-    console.log('this.on', this.on);
   }
-
 
   cropImage(event) {
     this.on.crop_image = true;
@@ -290,9 +290,6 @@ export class ResumeCreateComponent implements OnInit {
       return this.message('error', 'Complete croping image first.')
     }
 
-    const max = this.list.settings[this.list.settings.length - 1];
-    console.log({ max });
-
     if (stage === 'next') {
       switch (this.on.stage) {
         case 1: if (!this.checkStageFilled()) { return window.alert('Please enter personal information.') }; break;
@@ -310,22 +307,11 @@ export class ResumeCreateComponent implements OnInit {
         this.on.stage = this.list.settings[index1 - 1];
         break;
       case 'next':
-        this.list.stages.find(v => v.id === this.on.stage).completed = true;
+        this.list.stages.find(v => v.id === this.on.stage) ? this.list.stages.find(v => v.id === this.on.stage).completed = true : false;
         const index2 = this.list.settings.indexOf(this.on.stage);
         this.on.stage = this.list.settings[index2 + 1] ?? this.on.maxStages;
         break;
     }
-
-    console.log(this.on)
-
-    // if (this.on.stage === 2) {
-    //   this.fetchSkills().subscribe(res => {
-    //     this.list.skills = res.result.map(v => ({
-    //       name: v.text,
-    //       score: v.contentScore_DoNotUse
-    //     }))
-    //   })
-    // }
   }
 
   onRemove() {
@@ -356,6 +342,7 @@ export class ResumeCreateComponent implements OnInit {
         this.list.educations[this.list.educations.length - 2].edit = 0;
         break;
       case 5: this.list.projects.push({ ...this.data.project }); break;
+      case 10: this.list.projects.push({ ...this.data.project }); break;
       case 6: this.list.languages.push({ ...this.data.language }); break;
       case 7: this.list.references.push({ ...this.data.reference }); break;
     }
@@ -393,7 +380,7 @@ export class ResumeCreateComponent implements OnInit {
   onEdit() {
     this.data.sampleComponents[this.on.sample_id].show = 0;
     this.on.preview = 0;
-    this.on.stage = 1;
+    this.on.stage = this.list.stages[0]?.id;
   }
 
   onBgColor(color) {

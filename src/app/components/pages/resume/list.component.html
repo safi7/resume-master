@@ -1,0 +1,36 @@
+<div class="sample-container">
+  <header>
+    <div class="page-header">
+      <h1>
+        <i class="fas fa-magic"></i> {{on.title}}
+      </h1>
+    </div>
+    <div class="page-sub-header">
+      <h1>
+        <h2>
+          {{on.sub_title}} <i class="fas fa-magic" *ngIf="on.completed_text"></i>
+        </h2>
+      </h1>
+    </div>
+
+  </header>
+  <div class="image-preview">
+    <ng-container *ngFor="let image of list.left;">
+      <div class="left" *ngIf="!image.active">
+        <img [src]="image.link" alt="resume sample" />
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let image of list.imageUrls">
+      <div class="active" *ngIf="image.active">
+        <i class="fa-solid fa-chevron-left" (click)="showPreviousImage()"></i>
+        <img [src]="image.link" alt="resume sample" (click)="selectImage(image)" />
+        <i class="fa-solid fa-chevron-right" (click)="showNextImage()"></i>
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let image of list.right">
+      <div class="right" *ngIf="!image.active">
+        <img [src]="image.link" alt="resume sample" />
+      </div>
+    </ng-container>
+  </div>
+</div>

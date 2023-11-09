@@ -6,7 +6,12 @@
 }
 
 div.left {
-  min-width: 300px;
+  min-width: 250px;
+  min-height: 1000px;
+}
+
+div.right {
+  max-width: 450px;
 }
 
 section.image {
@@ -54,7 +59,7 @@ div.right section.name {
   width: max-content;
 
   h1 {
-    font-size: 5rem;
+    font-size: 3rem;
     line-height: 30px;
     width: max-content;
     font-weight: 700;
@@ -118,7 +123,7 @@ h2 {
 }
 
 #sample div.left section {
-  margin-top: 60px;
+  margin-top: 50px;
 
   h2 {
     margin-bottom: 20px;
@@ -129,8 +134,9 @@ h2 {
   }
 }
 
+
 #sample div.right section {
-  margin-top: 60px;
+  margin-top: 40px;
 
   h2 {
     margin-bottom: 20px;
