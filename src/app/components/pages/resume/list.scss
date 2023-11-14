@@ -7,15 +7,16 @@
     align-items: center;
     overflow: hidden;
     gap: 20px;
-    background-color: var(--color-primary-100);
+    background-color: rgb(234, 246, 255);
+    min-width: 1000px;
 
 }
 
 header {
-    border-bottom: 2px solid var(--color-primary-400);
     width: 100%;
     text-align: center;
-    background-color: var(--color-primary-300);
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .page-header {
@@ -40,17 +41,18 @@ header {
 }
 
 .page-header h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     /* Larger font size for the main heading */
     margin: 0;
     color: var(--color-primary);
-    width: 600px;
+    width: 100%;
     text-align: center;
 }
 
 .page-sub-header h2 {
-    width: 600px;
-    text-align: right;
+    font-size: 2.2rem;
+    width: 100%;
+    text-align: center;
     margin-bottom: 20px;
     background: linear-gradient(45deg, var(--color-primary-800), var(--color-blue));
     -webkit-background-clip: text;
@@ -58,6 +60,12 @@ header {
     -webkit-text-fill-color: transparent;
 }
 
+.page-sub-header h3 {
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 .image-preview {
     width: 100%;
@@ -66,7 +74,7 @@ header {
     justify-content: center;
     overflow: hidden;
     position: relative;
-    height: 80vh;
+    height: 90vh;
     min-height: 700px;
     flex-direction: row;
     /* Adjust the desired height */
@@ -92,7 +100,7 @@ header {
 .active {
     width: 680px;
     filter: none;
-    height: 80vh;
+    height: 90vh;
     transition: filter 0.3s ease;
     z-index: 2;
     position: absolute;
@@ -115,6 +123,13 @@ img {
     border-left: 1px solid var(--color-primary-100);
     border-right: 1px solid var(--color-primary-100);
 }
+
+.active:hover img {
+    width: 580px;
+    height: 95%;
+    margin-top: 20px;
+}
+
 
 .active img {
     cursor: pointer;
@@ -154,5 +169,142 @@ button {
         /* Add some right margin to create space */
         transform: scale(0.9);
         /* Zoom out the icon slightly */
+    }
+}
+
+
+.content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 40px 0px;
+    height: max-content;
+    flex-direction: column;
+    margin-top: 30px;
+    background-color: rgb(234, 246, 255);
+    position: relative;
+
+    .background {
+        border-top: 350px solid var(--color-purple-400);
+        border-left: 100px solid rgb(234, 246, 255);
+        border-right: 100px solid rgb(234, 246, 255);
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 350px;
+    }
+
+    .quotes {
+        z-index: 9;
+        position: absolute;
+        margin-top: 70px;
+
+        h2 {
+            padding: 20px 0px;
+            color: var(--color-white);
+        }
+
+        p {
+            padding: 2px 0px;
+            color: var(--color-white);
+        }
+    }
+
+    .samples-more {
+        margin-top: 50px;
+        z-index: 11;
+        width: 600px;
+        height: 700px;
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 100px;
+
+        img {
+            background: var(--white);
+            /* background-position: 50% 0; */
+            background-size: cover;
+            border-radius: 6px;
+            -webkit-box-shadow: 0 9px 15px rgba(100, 100, 123, .07);
+            /* box-shadow: 0 9px 15px rgba(100,100,123,.07); */
+            width: 320px;
+            height: 450px;
+        }
+
+        img.img-1 {
+            top: 50px;
+            -webkit-transform: rotate(-32.2deg);
+            transform: rotate(-32.2deg);
+            position: relative;
+            z-index: 1;
+
+        }
+
+        img.img-2 {
+            left: 120px;
+            top: 50px;
+            -webkit-transform: rotate(-8.51deg);
+            transform: rotate(-8.51deg);
+            position: absolute;
+            z-index: 2;
+
+        }
+
+        img.img-3 {
+            left: 240px;
+            top: 100px;
+            z-index: 12;
+            -webkit-transform: rotate(15.87deg);
+            transform: rotate(15.87deg);
+            position: absolute;
+        }
+
+
+    }
+
+    div.btns button {
+        font-size: 3rem;
+        padding: 10px 30px;
+        background-color: var(--color-orange-400);
+        color: var(--color-white);
+        width: 250px;
+        text-transform: uppercase;
+    }
+
+    div.btns {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .steps {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        padding: 100px 0px;
+        background-color: var(--color-blue-400);
+        width: 100%;
+        margin-top: 10%;
+    }
+
+    .steps-container {
+        width: 800px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 30px;
+    }
+
+    .step {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 250px;
+    }
+
+    i {
+        font-size: 4rem;
     }
 }

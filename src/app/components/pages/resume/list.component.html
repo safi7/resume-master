@@ -6,11 +6,10 @@
       </h1>
     </div>
     <div class="page-sub-header">
-      <h1>
-        <h2>
-          {{on.sub_title}} <i class="fas fa-magic" *ngIf="on.completed_text"></i>
-        </h2>
-      </h1>
+      <h2>
+        {{on.sub_title}} <i class="fas fa-magic" *ngIf="on.completed_text"></i>
+      </h2>
+      <h3>{{on.sub_title2}}</h3>
     </div>
 
   </header>
@@ -32,5 +31,48 @@
         <img [src]="image.link" alt="resume sample" />
       </div>
     </ng-container>
+  </div>
+  <div class="content">
+    <div class="background"></div>
+    <div class="quotes">
+      <h2>Link up with success! Let's create a #NextLevelResume!</h2>
+      <p>🚀 Craft professional resumes effortlessly! </p>
+      <p>🌐 Explore a world where your achievements shine!</p>
+      <p>🌟 Innovate your resume with style and collaboration!</p>
+      <p>📈 Achieve impactful results with every section!</p>
+    </div>
+
+    <div class="samples-more">
+      <img class="img-1" [src]="list.imageUrls[1]?.link" alt="resume sample">
+      <img class="img-2" [src]="list.imageUrls[6]?.link" alt="resume sample">
+      <img class="img-3" [src]="list.imageUrls[8]?.link" alt="resume sample">
+    </div>
+    <div class="btns">
+      <button class="button is-build" (click)="selectImage({id:2})">Build Now</button>
+    </div>
+    <div class="steps">
+      <h2>Crafting your perfect resume is as easy as 1-2-3 with just three simple steps!</h2>
+      <div class="steps-container">
+        <div class="step step1">
+          <i class="fa-regular fa-circle-check"></i>
+          <h3>Select Your Template</h3>
+          <p>Explore and choose the template that suits your style from the list. Click the template to begin your
+            journey.</p>
+        </div>
+
+        <div class="step step2">
+          <i class="fa-regular fa-pen-to-square"></i>
+          <h3>Complete Information</h3>
+          <p>Share your story with the hiring manager by filling in the necessary details in the required fields.</p>
+        </div>
+
+        <div class="step step3">
+          <i class="fa-solid fa-print"></i>
+          <h3>Generate and Save</h3>
+          <p>Generate a preview, customize with your preferred color and background, then save your professionally
+            crafted resume.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

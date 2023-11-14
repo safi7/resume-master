@@ -1,0 +1,77 @@
+<!-- header.component.html -->
+<header>
+    <div class="header-left">
+        <!-- Your app logo goes here -->
+        <img src="../../../assets/favicon/favicon-100x100.png" alt="App Logo" width="80px" height="60px">
+    </div>
+
+    <div class="header-center">
+        <!-- Your navigation links go here -->
+        <nav>
+            <!-- Add other navigation links as needed -->
+        </nav>
+    </div>
+
+    <div class="header-right" (mouseleave)="onHideDropdown()">
+        <!-- User dropdown and login button go here -->
+        <button class="button is-primary">Login</button>
+        <div class="user-dropdown" (mouseover)="onShowDropdown()">
+            <!-- Display user information or icon -->
+            <i class="fa-regular fa-circle-user"></i><i class="fa-solid fa-circle-chevron-down"></i>
+
+            <!-- Dropdown content (hidden by default) -->
+            <div class="dropdown-content" *ngIf="on.isDropdownVisible">
+                <!-- Dropdown items go here -->
+                <!-- <a href="#">Profile</a>
+                <a href="#">Settings</a>
+                <a href="#">Logout</a> -->
+            </div>
+        </div>
+    </div>
+</header>
+
+<router-outlet></router-outlet>
+<!-- footer.component.html -->
+<footer>
+    <!-- First Row -->
+    <div class="footer-row">
+        <div class="footer-left">
+            <!-- Left: Name and Logo -->
+            <img src="../../../assets/favicon/favicon-100x100.png" alt="Company Logo" width="100px" height="70px">
+            <span>Resume Master</span>
+        </div>
+
+        <div class="footer-center">
+            <!-- Center: Navigation -->
+            <nav>
+                <!-- <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">Contact</a> -->
+                <!-- Add other navigation links as needed -->
+            </nav>
+        </div>
+
+        <div class="footer-right">
+            <!-- Right: Social Media Icons -->
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="footer-row footer-second-row">
+        <div class="footer-left">
+            <ul>
+                <li> <a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-right">
+            <!-- Right: Copyright -->
+            <p>&copy; {{on.year }} Resume Master by <strong>Angeyza</strong>. All rights reserved.</p>
+        </div>
+    </div>
+</footer>

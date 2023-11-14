@@ -22,11 +22,13 @@ import {
   Sample10Component,
 
 } from '@components/shared/samples/index.component';
+import { MainLayutComponent } from '@components/layouts/main.component';
 
 @NgModule({
   declarations: [
     SimpleModalComponent,
     MessageComponent,
+    MainLayutComponent,
     PopupContentDirective,
     SampleBaseComponent,
     Sample01Component,
@@ -52,6 +54,7 @@ import {
   exports: [
     SimpleModalComponent,
     MessageComponent,
+    MainLayutComponent,
     PopupContentDirective,
     NgxSliderModule,
     LazyLoadImageModule,

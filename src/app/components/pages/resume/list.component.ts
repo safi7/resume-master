@@ -20,6 +20,7 @@ export class ResumeListComponent implements OnInit {
     currentSample: 5,
     title: '',
     sub_title: '',
+    sub_title2: '',
     completed_text: false
   }
 
@@ -27,8 +28,9 @@ export class ResumeListComponent implements OnInit {
     imageUrls: samples,
     left: [],
     right: [],
-    text: 'Craft stunning resumes with a few effortless steps',
-    sub_text: 'Stunning background and font color selections'
+    text: 'Craft stunning resumes with a few steps',
+    sub_text: 'Stunning background and font color selections',
+    sub_text2: 'Unlock your professional potential effortlessly and open doors to your dream career!'
   }
 
 
@@ -94,6 +96,7 @@ export class ResumeListComponent implements OnInit {
       if (i >= this.list.sub_text.length) {
         this.on.completed_text = true;
         clearInterval(timer)
+        this.on.sub_title2 = this.list.sub_text2
         return
       } else {
         this.on.sub_title = this.list.sub_text.slice(0, i + 1);
