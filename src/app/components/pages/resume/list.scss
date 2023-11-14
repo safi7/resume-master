@@ -8,7 +8,7 @@
     overflow: hidden;
     gap: 20px;
     background-color: rgb(234, 246, 255);
-    min-width: 1000px;
+    min-width: 400px;
 
 }
 
@@ -98,7 +98,8 @@ header {
 }
 
 .active {
-    width: 680px;
+    max-width: 680px;
+    min-width: 400px;
     filter: none;
     height: 90vh;
     transition: filter 0.3s ease;
@@ -118,14 +119,13 @@ header {
 }
 
 img {
-    width: 600px;
+    max-width: 600px;
     height: 100%;
     border-left: 1px solid var(--color-primary-100);
     border-right: 1px solid var(--color-primary-100);
 }
 
 .active:hover img {
-    width: 580px;
     height: 95%;
     margin-top: 20px;
 }
@@ -140,7 +140,8 @@ img {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 600px;
+    max-width: 600px;
+    min-width: 400px;
     gap: 20px;
 }
 
@@ -213,12 +214,12 @@ button {
     .samples-more {
         margin-top: 50px;
         z-index: 11;
-        width: 600px;
-        height: 700px;
+        max-width: 600px;
+        min-width: 400px;
+        height: 600px;
         position: relative;
         display: flex;
         justify-content: flex-start;
-        margin-left: 100px;
 
         img {
             background: var(--white);
@@ -227,35 +228,35 @@ button {
             border-radius: 6px;
             -webkit-box-shadow: 0 9px 15px rgba(100, 100, 123, .07);
             /* box-shadow: 0 9px 15px rgba(100,100,123,.07); */
-            width: 320px;
-            height: 450px;
+            max-width: 320px;
+            max-height: 450px;
         }
 
         img.img-1 {
             top: 50px;
-            -webkit-transform: rotate(-32.2deg);
-            transform: rotate(-32.2deg);
+            -webkit-transform: rotate(-22.2deg);
+            transform: rotate(-22.2deg);
             position: relative;
             z-index: 1;
 
         }
 
         img.img-2 {
-            left: 120px;
-            top: 50px;
-            -webkit-transform: rotate(-8.51deg);
-            transform: rotate(-8.51deg);
+            left: 90px;
+            top: 60px;
+            -webkit-transform: rotate(-4.51deg);
+            transform: rotate(-4.51deg);
             position: absolute;
             z-index: 2;
 
         }
 
         img.img-3 {
-            left: 240px;
-            top: 100px;
+            left: 170px;
+            top: 80px;
             z-index: 12;
-            -webkit-transform: rotate(15.87deg);
-            transform: rotate(15.87deg);
+            -webkit-transform: rotate(8.87deg);
+            transform: rotate(8.87deg);
             position: absolute;
         }
 
@@ -290,7 +291,8 @@ button {
     }
 
     .steps-container {
-        width: 800px;
+        min-width: 400px;
+        max-width: 800px;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -301,10 +303,63 @@ button {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        width: 250px;
+        max-width: 250px;
     }
 
     i {
         font-size: 4rem;
+    }
+
+    .contact {
+        max-width: 800px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        padding: 10px;
+    }
+
+    .contact h2 {
+        margin-bottom: 30px;
+    }
+
+    div.row {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    div.row p {
+        width: 150px;
+        margin-top: 10px;
+    }
+
+    div.row input {
+        width: 100%;
+    }
+
+    div.row p.message {
+        margin-top: 50px;
+    }
+
+    div.row textarea {
+        width: 100%;
+        height: 150px;
+    }
+
+    .contact button.is-primary {
+        background-color: var(--color-primary-600);
+        width: 150px;
+        padding: 10px 20px;
+    }
+
+    .contact div.sbtn {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
     }
 }

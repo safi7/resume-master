@@ -1,3 +1,4 @@
+<app-message></app-message>
 <div class="sample-container">
   <header>
     <div class="page-header">
@@ -21,9 +22,9 @@
     </ng-container>
     <ng-container *ngFor="let image of list.imageUrls">
       <div class="active" *ngIf="image.active">
-        <i class="fa-solid fa-chevron-left" (click)="showPreviousImage()"></i>
-        <img [src]="image.link" alt="resume sample" (click)="selectImage(image)" />
-        <i class="fa-solid fa-chevron-right" (click)="showNextImage()"></i>
+        <i class="fa-solid fa-chevron-left" (click)="onShowPreviousImage()"></i>
+        <img [src]="image.link" alt="resume sample" (click)="onSelectImage(image)" />
+        <i class="fa-solid fa-chevron-right" (click)="onShowNextImage()"></i>
       </div>
     </ng-container>
     <ng-container *ngFor="let image of list.right">
@@ -48,7 +49,7 @@
       <img class="img-3" [src]="list.imageUrls[8]?.link" alt="resume sample">
     </div>
     <div class="btns">
-      <button class="button is-build" (click)="selectImage({id:2})">Build Now</button>
+      <button class="button is-build" (click)="onSelectImage({id:2})">Build Now</button>
     </div>
     <div class="steps">
       <h2>Crafting your perfect resume is as easy as 1-2-3 with just three simple steps!</h2>
@@ -72,6 +73,29 @@
           <p>Generate a preview, customize with your preferred color and background, then save your professionally
             crafted resume.</p>
         </div>
+      </div>
+    </div>
+    <div class="contact">
+      <h2>Feel free to reach out for assistance or feedback by using provided channels.
+      </h2>
+      <!-- <div class="row">
+        <p>safi@angeyza.com</p>
+        <p>+601123270509</p>
+      </div> -->
+      <div class="row">
+        <p>Name:</p>
+        <input type="text" [(ngModel)]="on.name">
+      </div>
+      <div class="row">
+        <p>Email:</p>
+        <input type="text" [(ngModel)]="on.email">
+      </div>
+      <div class="row">
+        <p class="message">Mesage:</p>
+        <textarea type="text" [(ngModel)]="on.message"></textarea>
+      </div>
+      <div class="sbtn">
+        <button class="button is-primary" (click)="onEmail()">Send</button>
       </div>
     </div>
   </div>

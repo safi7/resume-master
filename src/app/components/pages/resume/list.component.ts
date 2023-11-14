@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
 import _ from 'lodash';
 import samples from '@configs/preview-samples';
+import emailjs from '@emailjs/browser'
 
 
 declare var $;
@@ -21,7 +22,10 @@ export class ResumeListComponent implements OnInit {
     title: '',
     sub_title: '',
     sub_title2: '',
-    completed_text: false
+    completed_text: false,
+    email: '',
+    name: '',
+    message: '',
   }
 
   list = {
@@ -44,10 +48,10 @@ export class ResumeListComponent implements OnInit {
     this.displayTitle()
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  showPreviousImage() {
+  onShowPreviousImage() {
     const currentIndex = this.list.imageUrls.findIndex(v => v.active);
     this.list.imageUrls[currentIndex].active = false;
     this.list.imageUrls = this.list.imageUrls.map(v => ({ ...v, active: false }))
@@ -55,7 +59,7 @@ export class ResumeListComponent implements OnInit {
     this.list.imageUrls[index].active = true;
   }
 
-  showNextImage() {
+  onShowNextImage() {
     const currentIndex = this.list.imageUrls.findIndex(v => v.active);
     this.list.imageUrls[currentIndex].active = false;
     this.list.imageUrls = this.list.imageUrls.map(v => ({ ...v, active: false }))
@@ -63,8 +67,39 @@ export class ResumeListComponent implements OnInit {
     this.list.imageUrls[index].active = true;
   }
 
-  selectImage(image) {
+  onSelectImage(image) {
     window.open(`/#/resume/${image.id}/create`, '_self')
+  }
+
+  onEmail() {
+    if (!(this.on.email && this.on.message)) {
+      this.updateEnv()
+      return this.messageS.updateEnvelop({ type: 'error', message: 'Please provide your email and message.' })
+    }
+
+    const email = {
+      from_name: this.on.name ?? 'unknown',
+      from_email: this.on.email,
+      message: this.on.message
+    }
+
+    emailjs.send("service_y4fekhi", "template_pwz50pa", email, 'eJe_c2_1zcjXnxKP5')
+      .then(res => {
+        if (res.status === 200) {
+          this.messageS.updateEnvelop({ type: 'success', message: 'Email sent successfully.' });
+          this.updateEnv();
+          this.on.name = '';
+          this.on.email = '';
+          this.on.message = '';
+        } else {
+          this.messageS.updateEnvelop({ type: 'error', message: 'Failed to send email. Please email us directly at: 2911safi@gmail.com' });
+          this.updateEnv()
+        }
+      })
+      .catch(err => {
+        this.messageS.updateEnvelop({ type: 'error', message: 'Failed to send email. Please email us directly at: 2911safi@gmail.com' });
+        this.updateEnv()
+      })
   }
 
   fillLeftRight() {
@@ -104,6 +139,12 @@ export class ResumeListComponent implements OnInit {
       }
 
     }, 40)
+  }
+
+  updateEnv() {
+    setTimeout(() => {
+      this.messageS.restart()
+    }, 5 * 1000);
   }
 
 
