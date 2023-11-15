@@ -363,3 +363,115 @@ button {
         justify-content: flex-end;
     }
 }
+
+
+@media (max-width: 768px) {
+
+    .image-preview {
+        height: 620px;
+    }
+
+    .active {
+        max-width: 600px;
+        min-width: 400px;
+        max-height: 600px;
+    }
+
+    img {
+        max-width: 400px;
+        box-sizing: border-box;
+        height: 600px;
+    }
+
+    .image-preview i.fa-chevron-right {
+        font-size: 2rem;
+        margin-right: -7px;
+    }
+
+    .image-preview i.fa-chevron-left {
+        font-size: 2rem;
+        margin-left: -10px;
+    }
+
+    .content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px 0px;
+        height: max-content;
+        flex-direction: column;
+        margin-top: 30px;
+        background-color: rgb(234, 246, 255);
+        position: relative;
+        box-sizing: border-box;
+
+
+
+        .background {
+            border-top: 150px solid var(--color-purple-400);
+            border-left: 30px solid rgb(234, 246, 255);
+            border-right: 30px solid rgb(234, 246, 255);
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 150px;
+        }
+
+        .quotes {
+            z-index: 9;
+            position: absolute;
+            margin-top: 10px;
+
+            h2 {
+                padding: 10px 0px;
+                color: var(--color-white);
+                font-size: 1.5rem;
+            }
+
+            p {
+                padding: 2px 0px;
+                color: var(--color-white);
+                font-size: 1.2rem;
+            }
+        }
+
+        .samples-more {
+            max-width: 500px;
+        }
+
+        div.btns button {
+            font-size: 2rem;
+            padding: 5px 10px;
+            width: 150px;
+        }
+
+
+        .steps-container {
+            min-width: 400px;
+            max-width: 500px;
+        }
+
+        .step {
+            max-width: 150px;
+        }
+
+        i {
+            font-size: 4rem;
+        }
+
+        .contact {
+            max-width: 500px;
+            padding: 10px;
+        }
+
+        div.row p {
+            min-width: 50px;
+            max-width: 50px;
+            margin-top: 10px;
+        }
+
+        div.row input {
+            width: 100%;
+        }
+    }
+}
