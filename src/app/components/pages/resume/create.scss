@@ -37,7 +37,7 @@ div.progress-bar {
     gap: 10px;
     align-items: center;
     width: 100%;
-    min-width: 800px;
+    min-width: 500px;
 }
 
 .container {
@@ -47,7 +47,7 @@ div.progress-bar {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    min-width: 800px;
+    min-width: 500px;
     border-top: 3px solid var(--color-primary);
 }
 
@@ -66,7 +66,7 @@ form {
     min-height: 760px;
     max-height: 760px;
     overflow-y: auto;
-    min-width: 750px;
+    min-width: 450px;
 
 
     label {
@@ -83,12 +83,15 @@ form {
         margin-bottom: 15px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        box-sizing: border-box;
     }
 
     div.box {
         display: flex;
         flex-direction: column;
         gap: 5px;
+        box-sizing: border-box;
+
     }
 
     button.reset {
@@ -126,7 +129,7 @@ div.image-container {
     }
 
     .origin {
-        max-height: 3500px;
+        max-height: 350px;
         max-width: 350px;
         height: 350px;
     }
@@ -174,12 +177,18 @@ div.skills {
     }
 }
 
+div.project-desc textarea {
+    width: 100%;
+    height: 150px;
+}
+
 div.dhbox {
     max-width: 800px;
-    display: grid;
-    align-items: baseline;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    flex-direction: row;
     gap: 10px;
+    justify-content: baseline;
+    align-items: baseline;
 }
 
 div.skills textarea {
@@ -270,7 +279,6 @@ div.list-educations {
     }
 }
 
-
 button.add {
     background-color: var(--color-blue-800);
     color: white;
@@ -284,11 +292,11 @@ button.add {
 button.is-add {
     margin-top: 10px;
     margin-bottom: 10px;
-    min-width: 370px;
+    flex: 1;
 }
 
 button.is-remove {
-    min-width: 370px;
+    flex: 1;
 }
 
 button.added {

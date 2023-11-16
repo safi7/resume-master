@@ -17,7 +17,7 @@
         </section>
       </ng-container>
 
-      <section class="projects" *ngIf="data.project.length">
+      <section class="projects" *ngIf="data.project.length && data.project[0].title">
         <h2 [ngClass]="lb_sample_color">Links</h2>
         <ng-container *ngFor="let each of data.project">
           <p *ngIf="!each.link">{{each.title}}</p>

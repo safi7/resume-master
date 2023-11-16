@@ -323,6 +323,7 @@ export class ResumeCreateComponent implements OnInit {
       case 3:
         this.list.educations.pop();
         this.list.educations[this.list.educations.length - 1] ? this.list.educations[this.list.educations.length - 1].edit = 1 : 0; break;
+      case 10:
       case 5: this.list.projects.pop(); break;
       case 6: this.list.languages.pop(); break;
       case 7: this.list.references.pop(); break;
