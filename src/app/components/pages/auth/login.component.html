@@ -1,0 +1,30 @@
+<div class="main">
+    <div class="login-panel">
+        <app-message></app-message>
+        <h2>Login to start your wonderful journey with Angeyza</h2>
+        <span>Login with your prefered method</span>
+        <div class="btn">
+            <button class="button is-secondary icon" (click)="signInWithFacebook()"><i
+                    class="fa-brands fa-facebook"></i></button>
+            <button class="button is-secondary icon" (click)="signInWithGoogle()"><i
+                    class="fa-brands fa-google"></i></button>
+            <button class="button is-secondary" (click)="on.signup=!on.signup"><i class="fa-solid fa-user-plus"></i>
+                Create Account</button>
+        </div>
+        <hr>
+        <div class="signin" *ngIf="!on.signup">
+            <input type="text" [(ngModel)]="on.username" placeholder="Email">
+            <input type="password" [(ngModel)]="on.password" placeholder="Password">
+            <button class="button is-primary" (click)="signInWithAccount()"><i class="fa-solid fa-right-to-bracket"></i>
+                Signin</button>
+        </div>
+
+        <div class="signin" *ngIf="on.signup">
+            <input type="text" [(ngModel)]="on.name" placeholder="Full name">
+            <input type="text" [(ngModel)]="on.username" placeholder="Email">
+            <input type="password" [(ngModel)]="on.password" placeholder="Password">
+            <button class="button is-primary" (click)="signInWithAccount()"><i class="fa-solid fa-plus"></i>
+                Create</button>
+        </div>
+    </div>
+</div>

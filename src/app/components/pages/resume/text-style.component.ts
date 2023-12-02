@@ -4,8 +4,7 @@ import _ from 'lodash';
 import ZetyService from '@services/zety.service';
 import { IPopupableComponent } from '@interfaces/popupable.component';
 import Quill from 'quill';
-import { IndentStyle } from '../style/indent.js';
-import sanitize from 'sanitize-html';
+import { IndentStyle } from '../../shared/style/indent.js';
 
 
 Quill.register(Quill.import('attributors/attribute/direction'), true);

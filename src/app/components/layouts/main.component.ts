@@ -1,5 +1,6 @@
 // footer.component.ts
 import { Component, OnInit } from '@angular/core';
+import { SocialLoginService } from '@services/social-login.service';
 
 
 @Component({
@@ -9,12 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainLayutComponent implements OnInit {
 
+    constructor(
+        private socilaS: SocialLoginService
+    ) { }
+
     on = {
         isDropdownVisible: false,
-        year: 2023
+        year: 2023,
+        user: null
     }
 
     ngOnInit() {
+        const user = localStorage.getItem('user')
+
+        if (user) {
+            this.on.user = JSON.parse(user);
+        }
+
     }
     // Add footer-related logic here
 
@@ -25,5 +37,10 @@ export class MainLayutComponent implements OnInit {
 
     onHideDropdown() {
         this.on.isDropdownVisible = false;
+    }
+
+    onSignout() {
+        console.log('onSignout')
+        this.socilaS.signOut()
     }
 }

@@ -10,14 +10,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './modules/core.module';
 import { ErrorGlobalHandler } from './errors/global';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ResumeCreateComponent } from '@components/pages/resume/create.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { ResumeTextStyleComponent } from '@components/pages/resume/text-style.component';
 import { QuillModule } from 'ngx-quill';
-import { ResumeListComponent } from '@components/pages/resume/list.component';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+
+const googleLoginOptions = {
+  scope: 'profile email',
+  plugin_name: 'sample_login'
+};
 
 @NgModule({
-  declarations: [AppComponent, ResumeCreateComponent, ResumeTextStyleComponent, ResumeListComponent],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -28,6 +31,7 @@ import { ResumeListComponent } from '@components/pages/resume/list.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     LazyLoadImageModule,
+    SocialLoginModule,
     QuillModule.forRoot(),
   ],
 
@@ -46,7 +50,28 @@ import { ResumeListComponent } from '@components/pages/resume/list.component';
       provide: ErrorHandler,
       useClass: ErrorGlobalHandler
     },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '931591053095-ukm25ltv6sjgdq2j3tmjl0hmhtq6qmif.apps.googleusercontent.com',
+              googleLoginOptions
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '814221563686589',
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig
+    }
   ],
   bootstrap: [AppComponent]
 })
