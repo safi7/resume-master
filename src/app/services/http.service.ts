@@ -8,17 +8,21 @@ import { Injectable } from '@angular/core';
 import { MessageService } from '@services/message.service';
 import { environment } from '@env/environment';
 // import CryptoJS from 'crypto-js';
+import _ from 'lodash';
 
 @Injectable({ providedIn: 'root' })
 export default class HttpService {
-  baseApiPath = `https://builder.zety.com/eb/api/v1`;
-
+  baseApiPath = environment.apiHost;
+  id;
   constructor(
     private http: HttpClient,
     private messageS: MessageService,
-  ) { }
+  ) {
+    this.id = localStorage.getItem('jwt_token');
+  }
 
   get(path, payload = {}, httpOpts = {}, channel = 'public', baseurl = null) {
+    this.id = localStorage.getItem('jwt_token');
     this.messageS.restart(channel);
     // prettier-ignore
     const qs = this.queryString(payload);
@@ -26,6 +30,7 @@ export default class HttpService {
     if (qs.length) {
       url += '?' + qs;
     }
+    if (this.id) { httpOpts = { ...httpOpts, Authorization: this.id } }
     return (
       this.http
         .get<any>(url, {
@@ -39,11 +44,13 @@ export default class HttpService {
   }
 
   post(path, payload, httpOpts = {}, channel = 'public') {
+    this.id = localStorage.getItem('jwt_token');
     this.messageS.restart(channel);
     // console.log(`Calling POST ${path}`, payload, {
     //   headers: httpOpts
     // });
     // prettier-ignore
+    if (this.id) { httpOpts = { ...httpOpts, Authorization: this.id } }
     return (
       this.http
         .post<any>(this.baseApiPath + path, payload, {
@@ -57,11 +64,13 @@ export default class HttpService {
   }
 
   put(path, payload, httpOpts = {}, channel = 'public') {
+    this.id = localStorage.getItem('jwt_token');
     this.messageS.restart(channel);
 
     // console.log(`Calling PUT ${path}`, payload);
     // prettier-ignore
     httpOpts = { ...httpOpts };
+    if (this.id) { httpOpts = { ...httpOpts, Authorization: this.id } }
     return (
       this.http
         .put<any>(this.baseApiPath + path, payload, {
@@ -74,12 +83,15 @@ export default class HttpService {
     );
   }
 
-
-  delete(path, channel = 'public') {
+  delete(path, httpOpts = {}, channel = 'public') {
+    this.id = localStorage.getItem('jwt_token');
     this.messageS.restart(channel);
+    if (this.id) { httpOpts = { ...httpOpts, Authorization: this.id } }
     return (
       this.http
-        .delete<any>(this.baseApiPath + path)
+        .delete<any>(this.baseApiPath + path, {
+          headers: httpOpts
+        })
         .pipe(
           catchError(this.handlingError(channel).bind(this)),
           map(response => response)
@@ -97,9 +109,12 @@ export default class HttpService {
   }
 
   handlingError = channel => error => {
+    console.log('error', error.error);
+    let message = !!error.error ? error.error.message : error.message;
+    console.log('message3', message);
     this.messageS.updateEnvelop({
       channel,
-      message: error.message,
+      message,
     });
     return throwError(error);
   }

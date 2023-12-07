@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialLoginService } from '@services/social-login.service';
 
-
 @Component({
     selector: 'app-main-layout',
     templateUrl: './main.component.html',
@@ -11,7 +10,7 @@ import { SocialLoginService } from '@services/social-login.service';
 export class MainLayutComponent implements OnInit {
 
     constructor(
-        private socilaS: SocialLoginService
+        private socilaS: SocialLoginService,
     ) { }
 
     on = {
@@ -22,7 +21,6 @@ export class MainLayutComponent implements OnInit {
 
     ngOnInit() {
         const user = localStorage.getItem('user')
-
         if (user) {
             this.on.user = JSON.parse(user);
         }
@@ -40,7 +38,9 @@ export class MainLayutComponent implements OnInit {
     }
 
     onSignout() {
-        console.log('onSignout')
+        // console.log('onSignout')
         this.socilaS.signOut()
     }
 }
+
+

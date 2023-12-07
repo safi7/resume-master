@@ -41,7 +41,7 @@ export class ResumeCreateComponent implements OnInit {
   on = {
     api_key: null,
     api_secret: null,
-    stage: 1,
+    stage: 8,
     sample_id: 1,
     preview: 0,
     bg_color: 'bg-color-01',
@@ -88,7 +88,7 @@ export class ResumeCreateComponent implements OnInit {
     })
     this.list.settings = templateSettings[+this.on.sample_id] ?? templateSettings[0];
     this.on.maxStages = this.list.settings[this.list.settings.length - 1];
-    this.on.stage = this.list.settings[0];
+    this.on.stage = this.list.settings[this.list.settings.length - 1];
     this.list.stages = this.list.stages.filter(v => this.list.settings.includes(v.id))
     if (resume) {
       for (let [key, value] of _.entries(JSON.parse(resume))) {
@@ -508,7 +508,8 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   message(type, message, title = null) {
-    this.messageS.updateEnvelop({ type, message, title, });
+    console.log('displayMessage2', message);
+    ({ type, message, title, });
     setTimeout(() => {
       this.messageS.restart();
     }, 3000);

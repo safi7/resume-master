@@ -33,7 +33,6 @@ export class SocialLoginService {
     }
 
     signInWithGoogle(cb: (success: boolean) => void) {
-        console.log('this.authService', this.authService);
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
             (userData) => {
                 this.socialUser = userData;
@@ -55,7 +54,7 @@ export class SocialLoginService {
                     this.handleSignout()
                 },
                 (error) => {
-                    console.log(error)
+                    // console.log(error)
                 }
             );
         } else {

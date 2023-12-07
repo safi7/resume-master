@@ -1,14 +1,13 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MessageService } from '@services/message.service';
-import { of } from 'rxjs';
+import { of, timer } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
 import _ from 'lodash';
 import samples from '@configs/preview-samples';
 import emailjs from '@emailjs/browser'
-
+import MainMasterService from '@services/main-master-api.service';
 
 declare var $;
-
 
 @Component({
   selector: 'app-resume-list',
@@ -26,6 +25,7 @@ export class ResumeListComponent implements OnInit {
     email: '',
     name: '',
     message: '',
+    totalGenerated: 0
   }
 
   list = {
@@ -40,6 +40,7 @@ export class ResumeListComponent implements OnInit {
 
   constructor(
     private messageS: MessageService,
+    private mainapiS: MainMasterService
   ) {
     const number = (Math.ceil(Math.random() * 10) % 10);
     this.list.imageUrls[number].active = true;
@@ -49,6 +50,21 @@ export class ResumeListComponent implements OnInit {
   }
 
   ngOnInit() {
+    of(0).pipe(
+      mergeMap(this.mainapiS.getResumeCount.bind(this.mainapiS)),
+      tap(res => {
+        if (this.on.totalGenerated < res) {
+          const interval = setInterval(() => {
+            if (this.on.totalGenerated < res) {
+              const add = Math.min(res - this.on.totalGenerated, 15)
+              this.on.totalGenerated = this.on.totalGenerated + add;
+            } else {
+              clearInterval(interval)
+            }
+          }, 10);
+        }
+      })
+    ).subscribe()
   }
 
   onShowPreviousImage() {

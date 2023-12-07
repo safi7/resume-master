@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import MainMasterService from "@services/main-master-api.service";
 import MessageService from "@services/message.service";
 import { SocialLoginService } from "@services/social-login.service";
+import _ from 'lodash';
 
 
 
@@ -25,7 +27,8 @@ export default class ResumeLoginComponent implements OnInit {
         private socialLoginService: SocialLoginService,
         private messageS: MessageService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private mainapiS: MainMasterService
     ) {
         this.on.redirect = this.route.snapshot.queryParams.return ?? '/resume/list'
     }
@@ -54,9 +57,25 @@ export default class ResumeLoginComponent implements OnInit {
     }
 
     handleSignin() {
-        localStorage.setItem('jwt_token', JSON.stringify(this.socialLoginService.getSocialUser()))
-        localStorage.setItem('user', JSON.stringify(this.socialLoginService.getSocialUser()))
-        return this.router.navigateByUrl(this.on.redirect)
+        const fields = ['email', 'name', 'provider', 'photoUrl']
+        const user = this.socialLoginService.getSocialUser();
+        const payload = {
+            ..._.pick(this.socialLoginService.getSocialUser(), fields),
+            provider: user.provider.toLowerCase(),
+            username: user.id
+        }
+        this.mainapiS.authLogin(payload)
+            .subscribe(res => {
+                if (res) {
+                    localStorage.setItem('jwt_token', res.token)
+                    localStorage.setItem('user', JSON.stringify(_.omit(res, ['token'])))
+                    return this.router.navigateByUrl(this.on.redirect)
+                } else {
+                    return this.displayMessage('error', 'Failed to login.')
+                }
+            }, err => {
+                return this.displayMessage('error', 'Failed to login.')
+            })
     }
 
     signInWithAccount() {
@@ -66,6 +85,27 @@ export default class ResumeLoginComponent implements OnInit {
         if (valid) {
             return this.displayMessage('error', 'Fill up required fields.')
         }
+
+        const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(this.on.username)) {
+            return this.displayMessage('error', 'Please enter a valid email address.')
+        }
+
+        this.mainapiS.authLogin({ email: this.on.username, ..._.pick(this.on, ['name', 'username', 'signup', 'password']) })
+            .subscribe(res => {
+                console.log(res);
+                if (res) {
+                    localStorage.setItem('jwt_token', res.token)
+                    localStorage.setItem('user', JSON.stringify(_.omit(res, ['token'])))
+                    return this.router.navigateByUrl(this.on.redirect)
+                } else {
+                    return this.displayMessage('error', 'Failed to login.')
+                }
+            }, err => {
+                return this.displayMessage('error', 'Failed to login.')
+            })
+
 
         console.log(this.on);
     }
@@ -80,6 +120,7 @@ export default class ResumeLoginComponent implements OnInit {
     }
 
     displayMessage(type, message) {
+        console.log('displayMessage1', message);
         this.messageS.updateEnvelop({ type, message });
         setTimeout(() => {
             this.messageS.restart()

@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { delay, tap } from 'rxjs/operators';
 import SampleBaseComponent from './base.component';
+import MainMasterService from '@services/main-master-api.service';
+import _ from 'lodash'
 
 
 @Component({
@@ -16,11 +18,18 @@ import SampleBaseComponent from './base.component';
 })
 
 export class Sample01Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 1;
   }
   ngOnInit() {
+  }
+
+  generate() {
+    const resumeContent = JSON.parse(localStorage.getItem('resume') ?? '');
+    const content = resumeContent ? { ...resumeContent, background: [_.omit(resumeContent.background[0], ['image'])] } : ''
+    this.mainapiS.generateResume({ templateId: this.sample_id, content })
+      .subscribe(res => { }, err => { })
   }
 }
 
@@ -30,11 +39,15 @@ export class Sample01Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-02.scss']
 })
 export class Sample02Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 2;
   }
   ngOnInit() {
+  }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
   }
 }
 
@@ -44,12 +57,16 @@ export class Sample02Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-03.scss']
 })
 export class Sample03Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 3;
   }
   ngOnInit() {
     this.margin = [0, 0, 45, 0];
+  }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
   }
 }
 
@@ -59,11 +76,15 @@ export class Sample03Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-04.scss']
 })
 export class Sample04Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 4;
   }
   ngOnInit() {
+  }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
   }
 }
 
@@ -73,11 +94,15 @@ export class Sample04Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-05.scss']
 })
 export class Sample05Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 5;
   }
   ngOnInit() {
+  }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
   }
 }
 
@@ -87,11 +112,15 @@ export class Sample05Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-06.scss']
 })
 export class Sample06Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 6;
   }
   ngOnInit() {
+  }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
   }
 }
 
@@ -102,11 +131,15 @@ export class Sample06Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-07.scss']
 })
 export class Sample07Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 7;
   }
   ngOnInit() {
+  }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
   }
 }
 
@@ -116,12 +149,16 @@ export class Sample07Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-08.scss']
 })
 export class Sample08Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 8;
   }
 
   ngOnInit() {
+  }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
   }
 }
 
@@ -131,7 +168,7 @@ export class Sample08Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-09.scss']
 })
 export class Sample09Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 9;
   }
@@ -149,6 +186,10 @@ export class Sample09Component extends SampleBaseComponent implements OnInit {
       return `${last[0]}`;
     }
   }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
+  }
 }
 
 @Component({
@@ -157,10 +198,14 @@ export class Sample09Component extends SampleBaseComponent implements OnInit {
   styleUrls: ['./sample-10.scss']
 })
 export class Sample10Component extends SampleBaseComponent implements OnInit {
-  constructor() {
+  constructor(private mainapiS: MainMasterService) {
     super();
     this.sample_id = 10;
   }
   ngOnInit() {
+  }
+  generate() {
+    this.mainapiS.generateResume({ templateId: this.sample_id, content: JSON.parse(localStorage.getItem('resume')) })
+      .subscribe(res => { }, err => { })
   }
 }

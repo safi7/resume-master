@@ -87,7 +87,7 @@ export class ResumeTextStyleComponent implements OnInit, IPopupableComponent {
   }
 
   loadParameters(parameters) {
-    console.log('loadParameters', parameters);
+    // console.log('loadParameters', parameters);
     this.on.section = parameters.section;
     this.list.info = parameters.info;
     let info = null;

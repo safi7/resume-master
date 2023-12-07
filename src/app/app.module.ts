@@ -13,6 +13,42 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { environment } from '@env/environment';
+
+export function tokenGetter() {
+  // console.log('__tokenGetter', localStorage.getItem('jwt_token'));
+  return localStorage.getItem('jwt_token');
+}
+
+export function jwtOptionsFactory(options) {
+  let allowedDomains = options.allowedDomains || [];
+
+  function addAllowedDomains(domain) {
+    allowedDomains = [...allowedDomains, domain];
+  }
+
+  return {
+    addAllowedDomains,
+    options: () => ({
+      ...options,
+      allowedDomains: allowedDomains,
+    }),
+  };
+}
+
+export const jwtOptions = jwtOptionsFactory({
+  tokenGetter,
+  skipWhenExpired: true,
+  headerName: 'Authorization',
+  allowedDomains: [
+    'api-local.sportsinformations.com',
+    'api.sportsinformations.com',
+  ],
+  disallowedRoutes: []
+});
+
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -33,6 +69,12 @@ const googleLoginOptions = {
     LazyLoadImageModule,
     SocialLoginModule,
     QuillModule.forRoot(),
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptions.options
+      }
+    })
   ],
 
   /**
@@ -52,6 +94,11 @@ const googleLoginOptions = {
     },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
       provide: 'SocialAuthServiceConfig',
       useValue: {
         autoLogin: false,
@@ -59,20 +106,23 @@ const googleLoginOptions = {
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '931591053095-ukm25ltv6sjgdq2j3tmjl0hmhtq6qmif.apps.googleusercontent.com',
+              environment.google_key,
               googleLoginOptions
             )
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider(
-              '814221563686589',
+              environment.facebook_key,
             )
           }
         ]
       } as SocialAuthServiceConfig
-    }
+    },
+
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
