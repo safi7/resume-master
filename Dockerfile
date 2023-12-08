@@ -1,54 +1,32 @@
-# Install dependencies only when needed
-FROM node:18-alpine AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+# Use an official Node runtime as a parent image
+FROM node:14 AS builder
+
+# Set the working directory in the container
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY  package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
-# Rebuild the source code only when needed
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Install project dependencies
+RUN npm install
+
+# Copy the entire application to the container
 COPY . .
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
+# Build the Angular application
+RUN ng build --prod
 
-# RUN npm run generate:sitemap
-RUN npm run build
+# Use an official Nginx runtime as a parent image
+FROM nginx:1.21-alpine
 
-# If using npm comment out above and use below instead
-# RUN npm run build
+# Copy the Angular build from the builder stage to the nginx public directory
+COPY --from=builder /app/dist/* /usr/share/nginx/html/
 
-# Production image, copy all the files and run next
-FROM node:18-alpine AS runner
-WORKDIR /app
-
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
+# Expose port 13000
 EXPOSE 13000
-ENV PORT 13000
 
-CMD ["node", "server.js"]
+# Command to run NGINX
+CMD ["nginx", "-g", "daemon off;"]
