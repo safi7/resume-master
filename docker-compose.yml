@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  resumemaster-web:
+    container_name: resumemaster-web
+    build: .
+    restart: always
+    ports:
+      - "80:13000"
