@@ -3,17 +3,17 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { SharedModule } from './modules/shared.module';
+// import { LazyLoadImageModule } from 'ng-lazyload-image';
+// import { SharedModule } from './modules/shared.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './modules/core.module';
 import { ErrorGlobalHandler } from './errors/global';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { QuillModule } from 'ngx-quill';
+// import { QuillModule } from 'ngx-quill';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
-import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
+// import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { environment } from '@env/environment';
 
@@ -62,19 +62,19 @@ const googleLoginOptions = {
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule,
+    // SharedModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    LazyLoadImageModule,
+    // LazyLoadImageModule,
     SocialLoginModule,
-    QuillModule.forRoot(),
-    JwtModule.forRoot({
-      jwtOptionsProvider: {
-        provide: JWT_OPTIONS,
-        useFactory: jwtOptions.options
-      }
-    })
+    // QuillModule.forRoot(),
+    // JwtModule.forRoot({
+    //   jwtOptionsProvider: {
+    //     provide: JWT_OPTIONS,
+    //     useFactory: jwtOptions.options
+    //   }
+    // })
   ],
 
   /**
