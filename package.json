@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve  --host www-local.resume.angeyza.com --port 13100 --open",
-    "build": "ng build --configuration=production --stats-json",
+    "build": "ng build --prod --aot --vendor-chunk --source-map=false",
     "builddev": "ng build",
     "test": "ng test",
     "lint": "ng lint",
