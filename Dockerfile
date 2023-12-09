@@ -10,7 +10,7 @@ COPY package.json yarn.lock* ./
 RUN yarn global add @angular/cli
 
 # Install project dependencies
-RUN yarn install
+RUN yarn install --prefer-offline --offline
 
 # Copy the entire application to the container
 COPY . .
