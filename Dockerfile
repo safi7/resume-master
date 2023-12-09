@@ -1,17 +1,16 @@
-# Use an official Node runtime as a parent image
+# Stage 1: Build Angular application
 FROM node:14 AS builder
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+# Copy package.json and yarn.lock to the working directory
+COPY package.json yarn.lock* ./
 
 # Install Angular CLI globally
-RUN npm install -g @angular/cli
+RUN yarn global add @angular/cli
 
 # Install project dependencies
-RUN npm install
+RUN yarn install
 
 # Copy the entire application to the container
 COPY . .
@@ -19,14 +18,17 @@ COPY . .
 # Build the Angular application
 RUN ng build --prod
 
-# Use an official Nginx runtime as a parent image
+# Stage 2: Use Nginx for serving the built Angular application
 FROM nginx:1.21-alpine
 
-# Copy the Angular build from the builder stage to the nginx public directory
-COPY --from=builder /app/dist/* /usr/share/nginx/html/
+# Set the working directory in the Nginx container
+WORKDIR /usr/share/nginx/html
 
-# Expose port 13000
-EXPOSE 13000
+# Copy the built Angular application from the builder stage to the Nginx directory
+COPY --from=builder /app/dist/* ./
 
-# Command to run NGINX
+# Expose port 80 (default for HTTP)
+EXPOSE 80
+
+# Command to run NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
