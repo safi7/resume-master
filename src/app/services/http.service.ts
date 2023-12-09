@@ -1,4 +1,3 @@
-import * as moment from 'moment-timezone';
 
 import { HttpClient } from '@angular/common/http';
 import { throwError } from 'rxjs';
