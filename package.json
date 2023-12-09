@@ -24,7 +24,7 @@
     "@angular/forms": "^15.0.3",
     "@angular/localize": "^15.0.3",
     "@angular/material": "^15.0.2",
-    "@angular/platform-browser": "^15.0.3",
+    "@angular/platform-browser": "^15.0.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.0.3",
