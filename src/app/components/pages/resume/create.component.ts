@@ -95,7 +95,7 @@ export class ResumeCreateComponent implements OnInit {
 
     this.list.settings = templateSettings[+this.on.sample_id] ?? templateSettings[0];
     this.on.maxStages = this.list.settings[this.list.settings.length - 1];
-    this.on.stage = this.list.settings[this.list.settings.length - 1];
+    this.on.stage = this.list.settings[0];
     this.list.stages = this.list.stages.filter(v => this.list.settings.includes(v.id))
     if (resume) {
       for (let [key, value] of _.entries(JSON.parse(resume))) {

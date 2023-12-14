@@ -40,6 +40,7 @@ export class MainLayutComponent implements OnInit {
     onSignout() {
         // console.log('onSignout')
         this.socilaS.signOut()
+        this.on.user = null;
     }
 }
 
