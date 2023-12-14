@@ -86,6 +86,13 @@ export class ResumeCreateComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.on.sample_id = +params.get('id');
     })
+
+    const user = localStorage.getItem('user');
+    if (user) {
+      const { name, email } = JSON.parse(user);
+      this.data.background = { ...this.data.background, name, email }
+    }
+
     this.list.settings = templateSettings[+this.on.sample_id] ?? templateSettings[0];
     this.on.maxStages = this.list.settings[this.list.settings.length - 1];
     this.on.stage = this.list.settings[this.list.settings.length - 1];
