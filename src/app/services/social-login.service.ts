@@ -68,7 +68,7 @@ export class SocialLoginService {
         this.isLogged = false;
         localStorage.removeItem('jwt_token')
         localStorage.removeItem('user')
-        window.open('/resume/list', '_self')
+        window.open('/#/resume/list', '_self')
     }
 
     getSocialUser(): SocialUser {
