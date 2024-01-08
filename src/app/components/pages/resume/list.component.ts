@@ -50,21 +50,21 @@ export class ResumeListComponent implements OnInit {
   }
 
   ngOnInit() {
-    of(0).pipe(
-      mergeMap(this.mainapiS.getResumeCount.bind(this.mainapiS)),
-      tap(res => {
-        if (this.on.totalGenerated < res) {
-          const interval = setInterval(() => {
-            if (this.on.totalGenerated < res) {
-              const add = Math.min(res - this.on.totalGenerated, 15)
-              this.on.totalGenerated = this.on.totalGenerated + add;
-            } else {
-              clearInterval(interval)
-            }
-          }, 10);
-        }
-      })
-    ).subscribe()
+    // of(0).pipe(
+    //   mergeMap(this.mainapiS.getResumeCount.bind(this.mainapiS)),
+    //   tap(res => {
+    //     if (this.on.totalGenerated < res) {
+    //       const interval = setInterval(() => {
+    //         if (this.on.totalGenerated < res) {
+    //           const add = Math.min(res - this.on.totalGenerated, 15)
+    //           this.on.totalGenerated = this.on.totalGenerated + add;
+    //         } else {
+    //           clearInterval(interval)
+    //         }
+    //       }, 10);
+    //     }
+    //   })
+    // ).subscribe()
   }
 
   onShowPreviousImage() {
