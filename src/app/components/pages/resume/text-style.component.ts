@@ -4,28 +4,6 @@ import _ from 'lodash';
 import ZetyService from '@services/zety.service';
 import { IPopupableComponent } from '@interfaces/popupable.component';
 import Quill from 'quill';
-import { IndentStyle } from '../../shared/style/indent.js';
-
-
-Quill.register(Quill.import('attributors/attribute/direction'), true);
-
-Quill.register(Quill.import('attributors/class/align'), true);
-Quill.register(Quill.import('attributors/class/background'), true);
-Quill.register(Quill.import('attributors/class/color'), true);
-Quill.register(Quill.import('attributors/class/direction'), true);
-Quill.register(Quill.import('attributors/class/font'), true);
-Quill.register(Quill.import('attributors/class/size'), true);
-
-Quill.register(Quill.import('attributors/style/align'), true);
-Quill.register(Quill.import('attributors/style/background'), true);
-Quill.register(Quill.import('attributors/style/color'), true);
-Quill.register(Quill.import('attributors/style/direction'), true);
-Quill.register(Quill.import('attributors/style/font'), true);
-Quill.register(Quill.import('attributors/style/size'), true);
-
-Quill.register(IndentStyle, true);
-
-
 @Component({
   selector: 'app-resume-text-style',
   templateUrl: './text-style.component.html',
